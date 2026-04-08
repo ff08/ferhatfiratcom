@@ -4,6 +4,10 @@ export const ui = {
   tr: {
     nav: {
       email: "info@ferhatfirat.com",
+      home: "Anasayfa",
+      about: "Hakkımda",
+      references: "Referanslar",
+      contact: "İletişim",
       langTr: "TR",
       langEn: "EN",
     },
@@ -35,10 +39,21 @@ export const ui = {
     },
     followersLabel: "+1500 takipçi",
     locationLabel: "Ankara, Türkiye",
+    globalCta: {
+      title: "Birlikte üretelim",
+      body:
+        "No‑Code / Low‑Code ve web tasarımı üzerine notlarımı okuyabilir; yeni bir proje veya danışmanlık için doğrudan iletişime geçebilirsiniz.",
+      news: "Yazıları keşfet",
+      contact: "E-posta gönder",
+    },
   },
   en: {
     nav: {
       email: "info@ferhatfirat.com",
+      home: "Home",
+      about: "About",
+      references: "References",
+      contact: "Contact",
       langTr: "TR",
       langEn: "EN",
     },
@@ -70,6 +85,13 @@ export const ui = {
     },
     followersLabel: "+1500 followers",
     locationLabel: "Ankara, Turkey",
+    globalCta: {
+      title: "Let’s build something meaningful",
+      body:
+        "Browse my notes on no‑code, low‑code, and web design—or reach out if you’d like to talk about a new project or collaboration.",
+      news: "Browse articles",
+      contact: "Email me",
+    },
   },
 } as const;
 

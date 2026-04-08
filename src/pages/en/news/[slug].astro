@@ -1,0 +1,18 @@
+---
+import NewsDetailPage from "../../../components/pages/NewsDetailPage.astro";
+import { site } from "../../../content/site";
+
+export function getStaticPaths() {
+  return site.articles.map((a) => ({
+    params: { slug: a.slug },
+    props: { slug: a.slug },
+  }));
+}
+
+const { slug } = Astro.props as { slug: string };
+const article = site.articles.find((a) => a.slug === slug);
+if (!article) throw new Error(`Article not found: ${slug}`);
+---
+
+<NewsDetailPage lang="en" article={article} />
+

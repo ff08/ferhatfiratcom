@@ -26,10 +26,16 @@ export type ProjectItem = {
 };
 
 export type ArticleItem = {
-  title: string;
-  date: string;
+  slug: string;
+  titleTr: string;
+  titleEn: string;
+  excerptTr: string;
+  excerptEn: string;
+  dateISO: string; // YYYY-MM-DD
   category: "News" | "Articles";
-  href?: string;
+  readingMinutes?: number;
+  bodyTr: string; // HTML string
+  bodyEn: string; // HTML string
 };
 
 export type ServiceItem = {
@@ -75,7 +81,8 @@ export const site = {
       "UI/UX tasarımı, dijital pazarlama ve No-Code araçları konusunda tutkuluyum; markaların dijitalde büyümesini sağlamak için SEO denetimleri, anahtar kelime araştırmaları, rakip analizleri ve teknik optimizasyonlar yapıyorum.",
       "Hedefim markaların fikirlerini hızlı, estetik ve sürdürülebilir dijital deneyimlere dönüştürmelerine yardımcı olmak."
     ],
-    mission: "Empowering clients to bring their ideas to life without limits."
+    missionTr: "Amacım, danışanlarımın fikirlerini sınır tanımadan hayata geçirmelerine olanak sağlamak.",
+    missionEn: "My goal is to enable my clients to bring their ideas to life without limits."
   },
   socials: [
     {
@@ -207,19 +214,148 @@ export const site = {
   ],
   articles: [
     {
-      title: "What is the right design tool to choose in 2026?",
-      date: "Apr 8, 2026",
-      category: "News"
+      slug: "no-code-ai-2026-productization",
+      titleTr: "2026’da No‑Code + AI: ürünleştirme dönemi",
+      titleEn: "No‑Code + AI in 2026: the productization era",
+      excerptTr:
+        "No‑code araçlar AI ile birleşince prototipten ürüne geçiş süresi ciddi şekilde kısalıyor. Peki nerede hız, nerede kalite ve güvenlik devreye giriyor?",
+      excerptEn:
+        "As no‑code tools converge with AI, the path from prototype to product gets dramatically shorter. Where do speed, quality, and security really matter?",
+      dateISO: "2026-04-08",
+      category: "News",
+      readingMinutes: 5,
+      bodyTr: `
+        <p>No‑code ekosistemi 2026’da artık “hızlı prototip” alanından çıkıp <strong>ürünleşme</strong> tarafına daha çok yaklaşıyor. Özellikle AI destekli arayüz üretimi, metin→tasarım akışları ve otomatik içerik/SEO taslakları; ekiplerin üretim kapasitesini artırıyor.</p>
+        <h3>Neyi hızlandırıyor?</h3>
+        <ul>
+          <li><strong>İlk sürüm</strong>: Landing page, onboarding, pricing, blog gibi temel sayfalar.</li>
+          <li><strong>Operasyon</strong>: Form → CRM → e-posta → görev akışları (Make / Zapier / n8n).</li>
+          <li><strong>İçerik</strong>: Başlık varyasyonları, meta açıklamaları, görsel brief’leri.</li>
+        </ul>
+        <h3>Riskler nerede?</h3>
+        <ul>
+          <li><strong>Performans</strong>: Aşırı script ve eklenti bağımlılığı.</li>
+          <li><strong>Güvenlik</strong>: 3. parti entegrasyonlarda veri sızıntısı riski.</li>
+          <li><strong>Taşınabilirlik</strong>: Vendor lock‑in ve içerik/şablon bağımlılığı.</li>
+        </ul>
+        <p>Özet: No‑code + AI ile hız kazanırken, kritik sayfalarda (checkout, üyelik, ödeme) <strong>ölçümleme, performans bütçesi ve veri güvenliği</strong> standartlarını en baştan koymak gerekiyor.</p>
+      `,
+      bodyEn: `
+        <p>In 2026, the no‑code ecosystem is moving beyond “quick prototyping” into <strong>real productization</strong>. AI-assisted UI generation, text→design workflows, and automated content/SEO drafts significantly increase a team’s output.</p>
+        <h3>What it accelerates</h3>
+        <ul>
+          <li><strong>First release</strong>: Landing, onboarding, pricing, blog, and core marketing pages.</li>
+          <li><strong>Operations</strong>: Form → CRM → email → tasks (Make / Zapier / n8n).</li>
+          <li><strong>Content</strong>: Title variants, meta descriptions, visual briefs.</li>
+        </ul>
+        <h3>Where the risks are</h3>
+        <ul>
+          <li><strong>Performance</strong>: Too many scripts and plugin dependencies.</li>
+          <li><strong>Security</strong>: Data leakage risk in third‑party integrations.</li>
+          <li><strong>Portability</strong>: Vendor lock‑in and template/content coupling.</li>
+        </ul>
+        <p>Bottom line: keep the speed, but set <strong>analytics, performance budgets, and data-security standards</strong> from day one—especially for critical flows (checkout, auth, payments).</p>
+      `
     },
     {
-      title: "8 Figma design systems you can download for free today",
-      date: "Apr 8, 2026",
-      category: "News"
+      slug: "webflow-framer-brizy-which-when",
+      titleTr: "Webflow, Framer, Brizy: hangi senaryoda hangisi?",
+      titleEn: "Webflow, Framer, Brizy: which one for which scenario?",
+      excerptTr:
+        "Tek bir “en iyi” araç yok. Hedef, ekip yapısı, teslim süresi ve bakım ihtiyacı; seçimi doğrudan değiştiriyor.",
+      excerptEn:
+        "There’s no single “best” tool. Your goal, team shape, delivery timeline, and maintenance needs should drive the choice.",
+      dateISO: "2026-04-08",
+      category: "Articles",
+      readingMinutes: 6,
+      bodyTr: `
+        <p>Bu üç araç da farklı güçlü yönlere sahip. Doğru seçim için “ne inşa ediyorum?” sorusuna net cevap vermek gerekir.</p>
+        <h3>Framer</h3>
+        <ul>
+          <li><strong>İdeal</strong>: Hızlı, görsel odaklı marketing siteleri; micro‑interaction’lar.</li>
+          <li><strong>Dikkat</strong>: İçerik yönetimi ve kompleks IA büyüdükçe yönetim zorlaşabilir.</li>
+        </ul>
+        <h3>Webflow</h3>
+        <ul>
+          <li><strong>İdeal</strong>: CMS’li kurumsal siteler, blog/landing ölçekleme, ekipli çalışma.</li>
+          <li><strong>Dikkat</strong>: Tasarım sistemi disiplinine ihtiyaç duyar; aksi halde teknik borç oluşur.</li>
+        </ul>
+        <h3>Brizy (özellikle WordPress/Cloud)</h3>
+        <ul>
+          <li><strong>İdeal</strong>: WordPress ekosistemiyle hızlı kurulum, landing temelli akışlar.</li>
+          <li><strong>Dikkat</strong>: Performans için görsel/asset yönetimi ve minimal eklenti prensibi şart.</li>
+        </ul>
+        <p>Hızlı kural: <strong>tek sayfa/az içerik</strong> → Framer; <strong>CMS + büyüme</strong> → Webflow; <strong>WP ekosistemi</strong> → Brizy.</p>
+      `,
+      bodyEn: `
+        <p>These three tools shine in different situations. The right pick starts with a clear answer to: “What am I building?”</p>
+        <h3>Framer</h3>
+        <ul>
+          <li><strong>Best for</strong>: Fast, design-led marketing sites and micro‑interactions.</li>
+          <li><strong>Watch out</strong>: As IA and content scale, governance can become harder.</li>
+        </ul>
+        <h3>Webflow</h3>
+        <ul>
+          <li><strong>Best for</strong>: CMS-driven corporate sites, scalable blog/landing operations, team workflows.</li>
+          <li><strong>Watch out</strong>: Needs design-system discipline to avoid long-term debt.</li>
+        </ul>
+        <h3>Brizy (WordPress/Cloud)</h3>
+        <ul>
+          <li><strong>Best for</strong>: Quick setup in the WordPress ecosystem and landing-focused funnels.</li>
+          <li><strong>Watch out</strong>: Performance requires strict asset management and minimal plugins.</li>
+        </ul>
+        <p>Quick rule: <strong>single page / low content</strong> → Framer; <strong>CMS + growth</strong> → Webflow; <strong>WP ecosystem</strong> → Brizy.</p>
+      `
     },
     {
-      title: "Font sizes in UI design: The complete guide to follow",
-      date: "Apr 8, 2026",
-      category: "Articles"
+      slug: "low-code-automation-stack-2026",
+      titleTr: "Low‑Code otomasyon yığını (2026): Make, n8n, Zapier ve Lark",
+      titleEn: "Low‑Code automation stack (2026): Make, n8n, Zapier, and Lark",
+      excerptTr:
+        "Otomasyon artık sadece “bağla çalışsın” değil; izlenebilirlik, hata yönetimi ve maliyet kontrolü ile bir ürün gibi yönetiliyor.",
+      excerptEn:
+        "Automation is no longer just “connect and run”—it’s managed like a product with observability, error handling, and cost control.",
+      dateISO: "2026-04-08",
+      category: "Articles",
+      readingMinutes: 7,
+      bodyTr: `
+        <p>Low‑code otomasyonların olgunlaşmasıyla birlikte ekipler iki şeye odaklanıyor: <strong>gözlemlenebilirlik</strong> ve <strong>maliyet kontrolü</strong>.</p>
+        <h3>Make / Zapier</h3>
+        <ul>
+          <li><strong>Artı</strong>: Hızlı kurulum, çok sayıda hazır entegrasyon.</li>
+          <li><strong>Eksi</strong>: Karmaşık akışlarda debug ve versiyonlama zorlaşabilir.</li>
+        </ul>
+        <h3>n8n</h3>
+        <ul>
+          <li><strong>Artı</strong>: Self‑host, daha esnek kontrol, geliştirici dostu.</li>
+          <li><strong>Eksi</strong>: Kurulum/işletim sorumluluğu sizde.</li>
+        </ul>
+        <h3>Lark (ops katmanı)</h3>
+        <ul>
+          <li><strong>Artı</strong>: Doküman + tablo + görev + chat tek yerde; operasyon görünürlüğü.</li>
+          <li><strong>İpucu</strong>: Otomasyonları mutlaka “log tablosu” ile izleyin.</li>
+        </ul>
+        <p>Öneri: Kritik akışlarda hata durumunda geri dönüş planı (fallback) ve uyarı (Slack/e‑posta) şart. Aksi halde otomasyon “sessizce” bozulur.</p>
+      `,
+      bodyEn: `
+        <p>As low‑code automation matures, teams focus on two things: <strong>observability</strong> and <strong>cost control</strong>.</p>
+        <h3>Make / Zapier</h3>
+        <ul>
+          <li><strong>Pros</strong>: Fast setup and many ready-made integrations.</li>
+          <li><strong>Cons</strong>: Debugging and versioning can get difficult in complex flows.</li>
+        </ul>
+        <h3>n8n</h3>
+        <ul>
+          <li><strong>Pros</strong>: Self-hosted, flexible control, developer-friendly.</li>
+          <li><strong>Cons</strong>: You own operations and maintenance.</li>
+        </ul>
+        <h3>Lark (ops layer)</h3>
+        <ul>
+          <li><strong>Pros</strong>: Docs + tables + tasks + chat in one place; strong operational visibility.</li>
+          <li><strong>Tip</strong>: Track automations with a dedicated “log table”.</li>
+        </ul>
+        <p>Recommendation: for critical flows, always add a fallback plan plus alerts (Slack/email). Otherwise, automation tends to fail “silently”.</p>
+      `
     }
   ] satisfies ArticleItem[],
   services: [

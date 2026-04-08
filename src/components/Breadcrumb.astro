@@ -1,0 +1,38 @@
+---
+import { ui, type Lang } from "../content/i18n";
+
+const { lang, crumbs } = Astro.props as { lang: Lang; crumbs: { label: string; href?: string }[] };
+const t = ui[lang];
+const homeHref = lang === "tr" ? "/" : "/en";
+const navLabel = lang === "tr" ? "Sayfa yolu" : "Breadcrumb";
+---
+
+<nav aria-label={navLabel} class="text-sm text-slate-600">
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+    <li class="inline-flex min-w-0 items-center">
+      <a
+        class="focus-ring rounded-md font-medium text-slate-700 hover:text-slate-900 hover:underline"
+        href={homeHref}
+      >
+        {t.nav.home}
+      </a>
+    </li>
+    {crumbs.map((c) => (
+      <li class="inline-flex min-w-0 items-center gap-x-2">
+        <span class="select-none text-slate-300" aria-hidden="true">/</span>
+        {c.href ? (
+          <a
+            class="focus-ring truncate rounded-md font-medium text-slate-700 hover:text-slate-900 hover:underline"
+            href={c.href}
+          >
+            {c.label}
+          </a>
+        ) : (
+          <span class="truncate font-semibold text-slate-900" aria-current="page">
+            {c.label}
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

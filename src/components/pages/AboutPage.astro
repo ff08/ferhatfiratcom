@@ -3,6 +3,8 @@ import Layout from "../Layout.astro";
 import TopNav from "../TopNav.astro";
 import Footer from "../Footer.astro";
 import SectionCard from "../SectionCard.astro";
+import GlobalCta from "../GlobalCta.astro";
+import Breadcrumb from "../Breadcrumb.astro";
 import Icon from "../Icon.astro";
 import { site } from "../../content/site";
 import { ui, type Lang } from "../../content/i18n";
@@ -15,13 +17,26 @@ const pageTitle = lang === "tr" ? "Hakkımda" : "About";
 <Layout title={pageTitle} lang={lang}>
   <TopNav lang={lang} />
   <main class="container mt-10">
+    <div class="mb-6">
+      <Breadcrumb lang={lang} crumbs={[{ label: pageTitle }]} />
+    </div>
     <div class="mb-8">
       <h1>{pageTitle}</h1>
-      <p class="mt-3 max-w-3xl text-slate-600">{site.hero.mission}</p>
+      <p class="mt-3 max-w-3xl text-slate-600">{lang === "tr" ? site.hero.missionTr : site.hero.missionEn}</p>
     </div>
 
     <div class="grid gap-6 lg:grid-cols-12">
       <div class="lg:col-span-7">
+        <div id="profile" class="mb-6">
+        <SectionCard title={lang === "tr" ? "Profil" : "Profile"}>
+          <div class="prose prose-slate max-w-none">
+            {(lang === "tr" ? site.hero.bioTr : site.hero.bioEn).map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
+        </SectionCard>
+        </div>
+
         <div id="resume" class="mb-6">
           <SectionCard title={lang === "tr" ? "Özgeçmişim" : "Resume"}>
             <div class="grid gap-3">
@@ -34,10 +49,10 @@ const pageTitle = lang === "tr" ? "Hakkımda" : "About";
                       <Icon name={r.icon ?? "briefcase"} class="h-5 w-5" />
                     )}
                   </div>
-                  <div class="min-w-0">
-                    <div class="flex flex-wrap items-center justify-between gap-2">
-                      <div class="font-bold">{r.title}</div>
-                      <div class="text-xs font-semibold text-slate-500">{r.range}</div>
+                  <div class="min-w-0 flex-1">
+                    <div class="grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3">
+                      <div class="min-w-0 font-bold">{r.title}</div>
+                      <div class="shrink-0 whitespace-nowrap text-right text-xs font-semibold tabular-nums text-slate-500">{r.range}</div>
                     </div>
                     <div class="mt-0.5 text-sm text-slate-600">{r.company}</div>
                     {(r.employmentType || r.location) && (
@@ -52,14 +67,6 @@ const pageTitle = lang === "tr" ? "Hakkımda" : "About";
             </div>
           </SectionCard>
         </div>
-
-        <SectionCard title={lang === "tr" ? "Profil" : "Profile"}>
-          <div class="prose prose-slate max-w-none">
-            {(lang === "tr" ? site.hero.bioTr : site.hero.bioEn).map((p) => (
-              <p>{p}</p>
-            ))}
-          </div>
-        </SectionCard>
 
         <div id="projects" class="mt-6">
           <SectionCard title={lang === "tr" ? "Projeler" : "Projects"}>
@@ -98,20 +105,8 @@ const pageTitle = lang === "tr" ? "Hakkımda" : "About";
           </SectionCard>
         </div>
 
-        <div id="articles" class="mt-6">
-          <SectionCard title={lang === "tr" ? "Haberler & Yazılar" : "News & Articles"}>
-            <div class="divide-y divide-slate-200">
-              {site.articles.map((a) => (
-                <div class="py-3">
-                  <div class="text-sm font-semibold text-slate-900">{a.title}</div>
-                  <div class="mt-1 flex items-center gap-2 text-xs text-slate-500">
-                    <span class="rounded-full bg-slate-100 px-2 py-0.5 font-semibold text-slate-700">{a.category}</span>
-                    <span>{a.date}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </SectionCard>
+        <div class="mt-6">
+          <GlobalCta lang={lang} />
         </div>
       </div>
 
