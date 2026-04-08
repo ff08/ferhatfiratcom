@@ -4,15 +4,15 @@ import { ui, type Lang } from "../content/i18n";
 const { lang } = Astro.props as { lang: Lang };
 const t = ui[lang];
 
-type Marker = { label: string; x: number; y: number };
+type Marker = { label: string; x: number; y: number; xMd: number; yMd: number };
 
 // Minimal, stylized "map" canvas (not geospatially accurate).
-// Coordinates are percentages.
+// Coordinates are percentages. Narrow viewports use looser spacing so pins do not crowd.
 const markers: Marker[] = [
-  { label: "Mannheim", x: 24, y: 38 },
-  { label: "İzmir", x: 58, y: 58 },
-  { label: "Antalya", x: 67, y: 76 },
-  { label: "Ankara", x: 75, y: 52 }
+  { label: "Mannheim", x: 14, y: 30, xMd: 24, yMd: 38 },
+  { label: "İzmir", x: 44, y: 56, xMd: 58, yMd: 58 },
+  { label: "Antalya", x: 52, y: 78, xMd: 67, yMd: 76 },
+  { label: "Ankara", x: 84, y: 44, xMd: 75, yMd: 52 }
 ];
 
 const companiesByCity: Record<string, string> = {
@@ -31,8 +31,8 @@ const companiesByCity: Record<string, string> = {
   <div class="relative h-[280px] w-full sm:h-[320px]">
     {markers.map((m) => (
       <div
-        class="group absolute"
-        style={`left:${m.x}%;top:${m.y}%;transform:translate(-50%,-50%);`}
+        class="location-marker group absolute"
+        style={`--x:${m.x}%;--y:${m.y}%;--x-md:${m.xMd}%;--y-md:${m.yMd}%;`}
       >
         <div class="relative inline-flex items-center gap-2">
           <span class="absolute -inset-3 rounded-full bg-emerald-500/10 opacity-0 blur-md transition group-hover:opacity-100"></span>
@@ -52,4 +52,18 @@ const companiesByCity: Record<string, string> = {
     {t.sections.location}: Ankara • Antalya • Mannheim • İzmir
   </div>
 </div>
+
+<style>
+  .location-marker {
+    left: var(--x);
+    top: var(--y);
+    transform: translate(-50%, -50%);
+  }
+  @media (min-width: 768px) {
+    .location-marker {
+      left: var(--x-md);
+      top: var(--y-md);
+    }
+  }
+</style>
 
