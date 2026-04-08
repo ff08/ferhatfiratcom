@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    {
+      "source": "https://www.ferhatfirat.com/:path*",
+      "destination": "https://ferhatfirat.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "http://www.ferhatfirat.com/:path*",
+      "destination": "https://ferhatfirat.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "http://ferhatfirat.com/:path*",
+      "destination": "https://ferhatfirat.com/:path*",
+      "permanent": true
+    }
+  ]
+}
+
