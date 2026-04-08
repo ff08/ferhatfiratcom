@@ -5,6 +5,7 @@ import Footer from "../Footer.astro";
 import Hero from "../Hero.astro";
 import SectionCard from "../SectionCard.astro";
 import Icon from "../Icon.astro";
+import LocationMap from "../LocationMap.astro";
 import { site } from "../../content/site";
 import { ui, type Lang } from "../../content/i18n";
 
@@ -33,9 +34,10 @@ function pseudoYears(seed: string): number {
   <main>
     <Hero lang={lang} />
 
-    <div class="container mt-8 grid gap-6 lg:grid-cols-12">
+    <div id="home-top" class="container mt-8 grid gap-6 lg:grid-cols-12">
       <div class="grid gap-6 lg:col-span-5">
-        <SectionCard title={t.sections.about}>
+        <div id="section-about" class="section section-about">
+          <SectionCard title={t.sections.about}>
           <div class="prose prose-slate max-w-none text-sm">
             {aboutParagraphs.slice(0, 4).map((p) => (
               <p class="muted">{p}</p>
@@ -49,9 +51,11 @@ function pseudoYears(seed: string): number {
             <span>{t.actions.readMore}</span>
             <Icon name="chevron-right" class="h-4 w-4" />
           </a>
-        </SectionCard>
+          </SectionCard>
+        </div>
 
-        <SectionCard title={t.sections.follow}>
+        <div id="section-follow" class="section section-follow">
+          <SectionCard title={t.sections.follow}>
           <div class="flex flex-wrap gap-2">
             {site.socials.map((s) => (
               <a
@@ -65,19 +69,17 @@ function pseudoYears(seed: string): number {
               </a>
             ))}
           </div>
-        </SectionCard>
+          </SectionCard>
+        </div>
       </div>
 
       <div class="lg:col-span-7">
-        <SectionCard title={t.sections.resume}>
-          <div class="grid gap-3" data-resume-list>
-            {site.resume.map((r, idx) => (
-              <div
-                class={`resume-item flex gap-3 rounded-xl border border-slate-200 bg-white p-4 ${
-                  idx >= 4 ? "hidden" : ""
-                }`}
-                data-resume-item
-              >
+        <div id="section-resume" class="section section-resume">
+          <SectionCard title={t.sections.resume}>
+          <div class="relative">
+          <div class="grid gap-3">
+            {site.resume.slice(0, 4).map((r) => (
+              <div class="resume-item flex gap-3 rounded-xl border border-slate-200 bg-white p-4">
                 <div class="mt-0.5 inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-slate-900 text-white">
                   {r.companyShort ? (
                     <span class="text-sm font-bold">{r.companyShort}</span>
@@ -103,48 +105,30 @@ function pseudoYears(seed: string): number {
           </div>
 
           {site.resume.length > 4 && (
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-20 rounded-2xl bg-gradient-to-b from-white/0 via-white/70 to-white/95"></div>
+          )}
+
+          {site.resume.length > 4 && (
             <>
-              <div class="mt-4">
-                <button
-                  type="button"
-                  class="focus-ring inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-50"
-                  data-resume-toggle
-                  aria-expanded="false"
+              <div class="relative mt-4">
+                <a
+                  class="focus-ring inline-flex items-center gap-2 rounded-lg px-1 py-1 text-sm font-semibold text-sky-700 underline-offset-4 hover:underline"
+                  href={lang === "tr" ? "/about#resume" : "/en/about#resume"}
                 >
-                  {t.actions.showMore}
-                </button>
+                  <span>{t.actions.readMore}</span>
+                  <Icon name="chevron-right" class="h-4 w-4" />
+                </a>
               </div>
-
-              <script is:inline>
-                document.addEventListener("DOMContentLoaded", () => {
-                  const list = document.querySelector("[data-resume-list]");
-                  const btn = document.querySelector("[data-resume-toggle]");
-                  if (!list || !btn) return;
-
-                  const items = Array.from(list.querySelectorAll("[data-resume-item]"));
-                  const hiddenItems = items.slice(4);
-                  if (hiddenItems.length === 0) {
-                    btn.remove();
-                    return;
-                  }
-
-                  let expanded = false;
-                  btn.addEventListener("click", () => {
-                    expanded = !expanded;
-                    hiddenItems.forEach((el) => el.classList.toggle("hidden", !expanded));
-                    btn.textContent = expanded ? ${JSON.stringify(t.actions.hide)} : ${JSON.stringify(t.actions.showMore)};
-                    btn.setAttribute("aria-expanded", expanded ? "true" : "false");
-                  });
-                });
-              </script>
             </>
           )}
-        </SectionCard>
+          </div>
+          </SectionCard>
+        </div>
       </div>
     </div>
 
-    <div class="container mt-6 grid gap-6 lg:grid-cols-12">
-      <div class="lg:col-span-12">
+    <div id="home-projects" class="container mt-6">
+      <div id="section-projects" class="section section-projects min-w-0">
         <SectionCard
           title={t.sections.projects}
           rightLinkLabel={t.actions.browseAll}
@@ -153,24 +137,24 @@ function pseudoYears(seed: string): number {
           <div class="grid gap-4 sm:grid-cols-2">
             {site.projects.map((p) => (
               <a
-                class="focus-ring group rounded-2xl border border-slate-200 bg-white p-6 hover:bg-slate-50"
+                class="focus-ring group block w-full max-w-full rounded-2xl border border-slate-200 bg-white p-6 hover:bg-slate-50"
                 href={p.href ?? (lang === "tr" ? "/about#projects" : "/en/about#projects")}
                 target={p.href && /^https?:\/\//.test(p.href) ? "_blank" : undefined}
                 rel={p.href && /^https?:\/\//.test(p.href) ? "noreferrer" : undefined}
               >
-                <div class="flex items-start gap-4">
-                  <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl">
+                <div class="flex min-w-0 items-start gap-4">
+                  <div class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl">
                     {p.logoSrc ? (
                       <img src={p.logoSrc} alt={`${p.title} logo`} class="h-10 w-10 object-contain" loading="lazy" />
                     ) : (
                       <Icon name={p.icon} class="h-8 w-8 text-slate-700" />
                     )}
                   </div>
-                  <div class="min-w-0">
+                  <div class="min-w-0 max-w-full">
                     <div class="text-base font-semibold tracking-tight text-slate-900">{p.title}</div>
-                    {p.tagline && <div class="mt-1 text-sm font-medium text-slate-600">{p.tagline}</div>}
-                    <div class="mt-2 text-sm text-slate-600">{p.description}</div>
-                    {p.domain && <div class="mt-2 text-xs font-semibold text-slate-500">{p.domain}</div>}
+                    {p.tagline && <div class="mt-1 max-w-full break-words text-sm font-medium text-slate-600">{p.tagline}</div>}
+                    <div class="mt-2 max-w-full break-words text-sm text-slate-600">{p.description}</div>
+                    {p.domain && <div class="mt-2 break-all text-xs font-semibold text-slate-500">{p.domain}</div>}
                   </div>
                 </div>
               </a>
@@ -179,7 +163,7 @@ function pseudoYears(seed: string): number {
         </SectionCard>
       </div>
 
-      <div class="lg:col-span-12">
+      <div id="section-references" class="section section-references mt-6 min-w-0">
         <SectionCard
           title={t.sections.references}
           rightLinkLabel={t.actions.browseAll}
@@ -188,9 +172,9 @@ function pseudoYears(seed: string): number {
           <div class="grid gap-4 sm:grid-cols-2">
             {site.references.slice(0, 4).map((r) => (
               <div class="rounded-2xl border border-slate-200 bg-white p-5">
-                <div class="flex items-start justify-between gap-4">
+                <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                   <div class="font-extrabold tracking-tight">{r.title}</div>
-                  <div class="shrink-0 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
+                  <div class="inline-flex items-center gap-2 self-start rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
                     <span class="relative inline-flex h-2.5 w-2.5 items-center justify-center">
                       <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-30"></span>
                       <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
@@ -205,7 +189,7 @@ function pseudoYears(seed: string): number {
                 {(lang === "tr" ? r.descriptionTr : r.descriptionEn) && (
                   <div class="mt-1 text-sm text-slate-600">{lang === "tr" ? r.descriptionTr : r.descriptionEn}</div>
                 )}
-                <div class="mt-2 text-xs font-semibold text-slate-500">{r.domain ?? safeHost(r.href)}</div>
+                <div class="mt-2 break-all text-xs font-semibold text-slate-500">{r.domain ?? safeHost(r.href)}</div>
 
                 <div class="mt-4 flex flex-wrap gap-4">
                   <a
@@ -255,112 +239,105 @@ function pseudoYears(seed: string): number {
         </SectionCard>
       </div>
 
-      <div class="lg:col-span-7">
-        <SectionCard title={t.sections.services}>
-          <div slot="right" class="flex items-center gap-2">
-            <button
-              type="button"
-              class="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-900 shadow-soft hover:bg-slate-50"
-              aria-label={lang === "tr" ? "Sola kaydır" : "Scroll left"}
-              data-services-prev
-            >
-              <span class="text-xl leading-none">‹</span>
-            </button>
-            <button
-              type="button"
-              class="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-900 shadow-soft hover:bg-slate-50"
-              aria-label={lang === "tr" ? "Sağa kaydır" : "Scroll right"}
-              data-services-next
-            >
-              <span class="text-xl leading-none">›</span>
-            </button>
-          </div>
-
-          <div class="relative">
-            <div
-              class="mt-2 flex gap-4 overflow-x-auto scroll-smooth pb-2 pr-2 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none]"
-              data-services-track
-            >
-              <style is:inline>{`[data-services-track]::-webkit-scrollbar{display:none}`}</style>
-
-              {site.services.map((s) => (
-                <div class="snap-start shrink-0 w-[85%] sm:w-[calc((100%-1rem)/2)] rounded-2xl border border-slate-200 bg-white p-5">
-                  <div class="flex items-start justify-between gap-4">
-                    <div class="min-w-0">
-                      <div class="font-semibold tracking-tight">{s.title}</div>
-                    </div>
-                    <div class="inline-flex w-[73px] shrink-0 items-start justify-end">
-                      {s.logoSrc ? (
-                        <img src={s.logoSrc} alt={`${s.title} logo`} class="h-auto w-[62px] object-contain" loading="lazy" />
-                      ) : (
-                        <Icon name={s.icon} class="h-12 w-12 text-slate-800" />
-                      )}
-                    </div>
-                  </div>
-                  <div class="mt-3 text-sm text-slate-600">{s.description}</div>
-                </div>
-              ))}
+      <div id="home-bottom" class="container mt-6 grid gap-6 lg:grid-cols-12">
+        <div id="section-services" class="section section-services min-w-0 lg:col-span-7">
+          <SectionCard title={t.sections.services}>
+            <div slot="right" class="flex items-center gap-2">
+              <button
+                type="button"
+                class="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-900 shadow-soft hover:bg-slate-50"
+                aria-label={lang === "tr" ? "Sola kaydır" : "Scroll left"}
+                data-services-prev
+              >
+                <span class="text-xl leading-none">‹</span>
+              </button>
+              <button
+                type="button"
+                class="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-900 shadow-soft hover:bg-slate-50"
+                aria-label={lang === "tr" ? "Sağa kaydır" : "Scroll right"}
+                data-services-next
+              >
+                <span class="text-xl leading-none">›</span>
+              </button>
             </div>
 
-            <script is:inline>
-              document.addEventListener("DOMContentLoaded", () => {
-                const track = document.querySelector("[data-services-track]");
-                const prev = document.querySelector("[data-services-prev]");
-                const next = document.querySelector("[data-services-next]");
-                if (!track || !prev || !next) return;
+            <div class="relative min-w-0">
+              <div
+                class="mt-2 flex w-full max-w-full gap-4 overflow-x-auto scroll-smooth pb-2 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none]"
+                data-services-track
+              >
+                <style is:inline>{`[data-services-track]::-webkit-scrollbar{display:none}`}</style>
 
-                const scrollByPage = (dir) => {
-                  const gap = 16; // gap-4
-                  const page = track.clientWidth + gap;
-                  track.scrollBy({ left: dir * page, behavior: "smooth" });
-                };
+                {site.services.map((s) => (
+                  <div class="snap-start shrink-0 w-[calc(100%-1rem)] sm:w-[calc((100%-1rem)/2)] rounded-2xl border border-slate-200 bg-white p-5">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="min-w-0">
+                        <div class="font-semibold tracking-tight">{s.title}</div>
+                      </div>
+                      <div class="inline-flex w-[73px] shrink-0 items-start justify-end">
+                        {s.logoSrc ? (
+                          <img src={s.logoSrc} alt={`${s.title} logo`} class="h-auto w-[62px] object-contain" loading="lazy" />
+                        ) : (
+                          <Icon name={s.icon} class="h-12 w-12 text-slate-800" />
+                        )}
+                      </div>
+                    </div>
+                    <div class="mt-3 text-sm text-slate-600">{s.description}</div>
+                  </div>
+                ))}
+              </div>
 
-                prev.addEventListener("click", () => scrollByPage(-1));
-                next.addEventListener("click", () => scrollByPage(1));
-              });
-            </script>
+              <script is:inline>
+                document.addEventListener("DOMContentLoaded", () => {
+                  const track = document.querySelector("[data-services-track]");
+                  const prev = document.querySelector("[data-services-prev]");
+                  const next = document.querySelector("[data-services-next]");
+                  if (!track || !prev || !next) return;
+
+                  const scrollByPage = (dir) => {
+                    const gap = 16; // gap-4
+                    const page = track.clientWidth + gap;
+                    track.scrollBy({ left: dir * page, behavior: "smooth" });
+                  };
+
+                  prev.addEventListener("click", () => scrollByPage(-1));
+                  next.addEventListener("click", () => scrollByPage(1));
+                });
+              </script>
+            </div>
+          </SectionCard>
+
+          <div id="section-skills" class="section section-skills mt-6">
+            <SectionCard title={t.sections.skills}>
+              <div class="flex flex-wrap gap-2">
+                {site.skills.map((s) => (
+                  <span class="pill">{s}</span>
+                ))}
+              </div>
+            </SectionCard>
           </div>
-        </SectionCard>
+        </div>
 
-        <div class="mt-6">
-          <SectionCard title={t.sections.skills}>
-            <div class="flex flex-wrap gap-2">
-              {site.skills.map((s) => (
-                <span class="pill">{s}</span>
+        <div id="section-news" class="section section-news min-w-0 lg:col-span-5">
+          <SectionCard title={t.sections.news} rightLinkLabel={t.actions.browseAll} rightLinkHref={lang === "tr" ? "/about#articles" : "/en/about#articles"}>
+            <div class="divide-y divide-slate-200">
+              {site.articles.map((a) => (
+                <a class="focus-ring block rounded-lg py-3 hover:bg-slate-50" href={a.href ?? (lang === "tr" ? "/about#articles" : "/en/about#articles")}>
+                  <div class="text-sm font-semibold text-slate-900">{a.title}</div>
+                  <div class="mt-1 flex items-center gap-2 text-xs text-slate-500">
+                    <span class="rounded-full bg-slate-100 px-2 py-0.5 font-semibold text-slate-700">{a.category}</span>
+                    <span>{a.date}</span>
+                  </div>
+                </a>
               ))}
             </div>
           </SectionCard>
         </div>
       </div>
 
-      <div class="lg:col-span-5">
-        <SectionCard title={t.sections.news} rightLinkLabel={t.actions.browseAll} rightLinkHref={lang === "tr" ? "/about#articles" : "/en/about#articles"}>
-          <div class="divide-y divide-slate-200">
-            {site.articles.map((a) => (
-              <a class="focus-ring block rounded-lg py-3 hover:bg-slate-50" href={a.href ?? (lang === "tr" ? "/about#articles" : "/en/about#articles")}>
-                <div class="text-sm font-semibold text-slate-900">{a.title}</div>
-                <div class="mt-1 flex items-center gap-2 text-xs text-slate-500">
-                  <span class="rounded-full bg-slate-100 px-2 py-0.5 font-semibold text-slate-700">{a.category}</span>
-                  <span>{a.date}</span>
-                </div>
-              </a>
-            ))}
-          </div>
-        </SectionCard>
-      </div>
-
-      <div class="lg:col-span-12">
+      <div id="section-location" class="section section-location mt-6 min-w-0">
         <SectionCard title={t.sections.location}>
-          <div class="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
-            <iframe
-              title="Map"
-              src={site.locationEmbedUrl}
-              class="h-[320px] w-full"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            />
-          </div>
-          <div class="mt-3 text-sm text-slate-600">{t.locationLabel}</div>
+          <LocationMap lang={lang} />
         </SectionCard>
       </div>
     </div>

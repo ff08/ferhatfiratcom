@@ -17,39 +17,166 @@ const t = ui[lang];
       <h1>{pageTitle}</h1>
       <p class="mt-3 max-w-3xl text-slate-600">
         {lang === "tr"
-          ? "Bu sayfa temel gizlilik, çerez ve kullanım şartları metinlerini içerir."
-          : "This page contains basic privacy, cookie and terms of use texts."}
+          ? "Bu sayfa gizlilik, çerez ve kullanım şartlarına ilişkin bilgilendirme metinlerini içerir."
+          : "This page includes informational texts about privacy, cookies, and terms of use."}
       </p>
     </div>
 
     <div class="grid gap-6">
       <SectionCard title={lang === "tr" ? "Gizlilik Politikası" : "Privacy Policy"}>
         <div class="prose prose-slate max-w-none">
-          <p>
-            {lang === "tr"
-              ? "Bu web sitesi, iletişim amaçlı paylaştığınız bilgileri (ör. e‑posta) yalnızca size dönüş yapmak için kullanır."
-              : "This website uses any information you share (e.g., email) only to respond to you."}
-          </p>
+          {lang === "tr" ? (
+            <>
+              <p>
+                Bu web sitesi (`ferhatfirat.com`), ziyaretçilerden alınan verileri yalnızca hizmetin sunulması, güvenliğin sağlanması
+                ve iletişim taleplerine dönüş yapılması amaçlarıyla işler.
+              </p>
+              <p>
+                <strong>Toplanabilecek veriler</strong> (kullanıma göre değişebilir):
+              </p>
+              <ul>
+                <li>İletişim bilgileri (ör. e‑posta) ve mesaj içeriği</li>
+                <li>Teknik veriler (IP, tarayıcı türü, cihaz bilgisi, yönlendiren sayfa, tarih/saat)</li>
+                <li>Performans/analitik verileri (anonim veya takma adlandırılmış metrikler)</li>
+              </ul>
+              <p>
+                <strong>Veri paylaşımı</strong>: Kişisel verileriniz üçüncü taraflara satılmaz. Yalnızca barındırma, güvenlik, CDN,
+                analitik gibi hizmet sağlayıcılarla zorunlu olduğu ölçüde paylaşılabilir.
+              </p>
+              <p>
+                <strong>Saklama süresi</strong>: Veriler, amaç için gerekli süre boyunca saklanır ve sonrasında silinir veya anonimleştirilir.
+              </p>
+              <p>
+                <strong>Haklar</strong>: KVKK kapsamındaki haklarınız (erişim, düzeltme, silme vb.) için aşağıdaki iletişim kanalından
+                bize ulaşabilirsiniz.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                This website (`ferhatfirat.com`) processes visitor data only to provide the service, maintain security, and respond to
+                contact requests.
+              </p>
+              <p>
+                <strong>Data that may be collected</strong> (depending on usage):
+              </p>
+              <ul>
+                <li>Contact details (e.g., email) and message content</li>
+                <li>Technical data (IP address, browser type, device info, referrer, timestamps)</li>
+                <li>Performance/analytics data (anonymous or pseudonymous metrics)</li>
+              </ul>
+              <p>
+                <strong>Sharing</strong>: Your personal data is not sold. It may be shared with essential service providers (hosting,
+                security, CDN, analytics) only as needed to operate the site.
+              </p>
+              <p>
+                <strong>Retention</strong>: Data is kept only for as long as necessary for the purpose, then deleted or anonymized.
+              </p>
+              <p>
+                <strong>Your rights</strong>: You may request access, correction, deletion, and other applicable rights by contacting us.
+              </p>
+            </>
+          )}
         </div>
       </SectionCard>
 
+      <div id="cookies">
       <SectionCard title={lang === "tr" ? "Çerez (Cookie) Politikası" : "Cookie Policy"}>
         <div class="prose prose-slate max-w-none">
-          <p>
-            {lang === "tr"
-              ? "Site, zorunlu çerezler ve (varsa) performans/analitik çerezleri kullanabilir."
-              : "The site may use essential cookies and (if enabled) performance/analytics cookies."}
-          </p>
+          {lang === "tr" ? (
+            <>
+              <p>
+                Çerezler (cookies), web sitesinin düzgün çalışması ve deneyimin iyileştirilmesi için tarayıcınıza kaydedilebilen küçük
+                dosyalardır.
+              </p>
+              <p>
+                <strong>Çerez türleri</strong>:
+              </p>
+              <ul>
+                <li><strong>Zorunlu</strong>: Temel işlevler ve güvenlik</li>
+                <li><strong>Tercih</strong>: Dil/arayüz tercihleri (varsa)</li>
+                <li><strong>Analitik</strong>: Ziyaretçi trafiğini anonim ölçümleme (varsa)</li>
+              </ul>
+              <p>
+                Çerezleri tarayıcı ayarlarınızdan kontrol edebilir, silebilir veya engelleyebilirsiniz. Çerezleri engellemeniz bazı
+                özelliklerin beklenildiği gibi çalışmamasına neden olabilir.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                Cookies are small files that can be stored in your browser to ensure the site works properly and to improve user experience.
+              </p>
+              <p>
+                <strong>Types of cookies</strong>:
+              </p>
+              <ul>
+                <li><strong>Essential</strong>: Core functionality and security</li>
+                <li><strong>Preferences</strong>: Language/UI preferences (if enabled)</li>
+                <li><strong>Analytics</strong>: Anonymous traffic measurement (if enabled)</li>
+              </ul>
+              <p>
+                You can control, delete, or block cookies via your browser settings. Blocking cookies may cause some features to not work as expected.
+              </p>
+            </>
+          )}
         </div>
       </SectionCard>
+      </div>
 
       <SectionCard title={lang === "tr" ? "Kullanım Şartları" : "Terms of Use"}>
         <div class="prose prose-slate max-w-none">
-          <p>
-            {lang === "tr"
-              ? "Sitedeki içerikler bilgilendirme amaçlıdır. İzinsiz kopyalama/yeniden yayınlama yapılmamalıdır."
-              : "Content is provided for informational purposes. Please do not copy/republish without permission."}
-          </p>
+          {lang === "tr" ? (
+            <>
+              <p>
+                Bu web sitesini kullanarak aşağıdaki şartları kabul etmiş sayılırsınız. Şartları kabul etmiyorsanız lütfen siteyi
+                kullanmayınız.
+              </p>
+              <ul>
+                <li>İçerikler bilgilendirme amaçlıdır; herhangi bir garanti taahhüt edilmez.</li>
+                <li>Site içeriği izinsiz kopyalanamaz, çoğaltılamaz veya yeniden yayınlanamaz.</li>
+                <li>Dış bağlantılar üçüncü taraf sitelere yönlendirebilir; bu sitelerin içeriklerinden sorumluluk alınmaz.</li>
+                <li>Hizmet/iletişim taleplerinde paylaşılan bilgilerin doğruluğu kullanıcı sorumluluğundadır.</li>
+              </ul>
+            </>
+          ) : (
+            <>
+              <p>
+                By using this website, you agree to the following terms. If you do not agree, please do not use the site.
+              </p>
+              <ul>
+                <li>Content is provided for informational purposes without warranties.</li>
+                <li>Content may not be copied, reproduced, or republished without permission.</li>
+                <li>External links may lead to third-party sites; we are not responsible for their content.</li>
+                <li>You are responsible for the accuracy of information you provide in contact/service requests.</li>
+              </ul>
+            </>
+          )}
+        </div>
+      </SectionCard>
+
+      <SectionCard title={lang === "tr" ? "KVKK / GDPR Bilgilendirmesi" : "KVKK / GDPR Notice"}>
+        <div class="prose prose-slate max-w-none">
+          {lang === "tr" ? (
+            <>
+              <p>
+                Kişisel verileriniz; hukuka ve dürüstlük kurallarına uygun olarak, belirli ve meşru amaçlar için, işlendikleri amaçla
+                bağlantılı ve sınırlı olarak işlenir.
+              </p>
+              <p>
+                Avrupa Birliği’nden erişim olması halinde, GDPR kapsamında benzer veri koruma prensipleri uygulanır.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                Personal data is processed lawfully, fairly, for specific legitimate purposes, and limited to what is necessary for those purposes.
+              </p>
+              <p>
+                For visitors from the EU, similar data protection principles apply under GDPR.
+              </p>
+            </>
+          )}
         </div>
       </SectionCard>
 
@@ -58,6 +185,9 @@ const t = ui[lang];
           <p>
             {lang === "tr" ? "Sorular için:" : "For questions:"}{" "}
             <a href={`mailto:${t.nav.email}`}>{t.nav.email}</a>
+          </p>
+          <p class="text-sm text-slate-500">
+            {lang === "tr" ? "Son güncelleme: 08.04.2026" : "Last updated: 2026-04-08"}
           </p>
         </div>
       </SectionCard>

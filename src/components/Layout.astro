@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { site } from "../content/site";
+import CookieConsent from "./CookieConsent.astro";
 
 const { title, description } = Astro.props as {
   title?: string;
@@ -35,6 +36,7 @@ const lang = Astro.props.lang ?? "tr";
   </head>
   <body>
     <slot />
+    <CookieConsent lang={lang} />
   </body>
 </html>
 

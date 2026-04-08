@@ -4,27 +4,31 @@ import Icon from "./Icon.astro";
 import { ui, type Lang } from "../content/i18n";
 
 const coverUrl = "/cover.png";
+const coverMobileUrl = "/cover-mobile.png";
 const avatarUrl = "/avatar.png";
 const { lang } = Astro.props as { lang: Lang };
 const t = ui[lang];
 ---
 
-<section class="container pt-10">
+<section id="hero" class="container pt-10">
   <div class="card overflow-hidden">
-    <div class="relative h-44 bg-slate-900">
-      <img
-        src={coverUrl}
-        alt="Cover"
-        class="h-full w-full object-cover"
-        loading="eager"
-        onerror="this.style.display='none'"
-      />
+    <div id="hero-cover" class="relative aspect-[16/5] bg-slate-900 sm:aspect-auto sm:h-44">
+      <picture>
+        <source media="(max-width: 639px)" srcset={coverMobileUrl} />
+        <img
+          src={coverUrl}
+          alt="Cover"
+          class="h-full w-full object-contain sm:object-cover"
+          loading="eager"
+          onerror="this.style.display='none'"
+        />
+      </picture>
     </div>
 
     <div class="relative px-6 pb-7 pt-0 sm:px-8">
       <div class="-mt-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div class="flex flex-col items-start">
-          <div class="relative h-24 w-24">
+          <div id="hero-avatar" class="relative h-24 w-24">
             <div class="h-24 w-24 overflow-hidden rounded-full border-4 border-white bg-slate-100 shadow-soft">
               <img
                 src={avatarUrl}
@@ -35,10 +39,6 @@ const t = ui[lang];
               />
             </div>
 
-            <!-- Online dot (always on top) -->
-            <span class="pointer-events-none absolute -right-0.5 -top-0.5 z-[9999] inline-flex h-4 w-4 items-center justify-center">
-              <span class="inline-flex h-3 w-3 rounded-full border-2 border-white bg-emerald-500 shadow-md"></span>
-            </span>
           </div>
 
           <div class="mt-6">

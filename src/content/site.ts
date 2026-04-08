@@ -188,6 +188,7 @@ export const site = {
         "Günlük maç takibi için hızlı ve sade bir deneyim. Programı kontrol et, anında paylaş.",
       domain: "bugunmacvarmi.com",
       href: "https://bugunmacvarmi.com",
+      logoSrc: "/projects/bugunmacvarmi.png",
       icon: "startup"
     }
   ] satisfies ProjectItem[],
@@ -604,6 +605,158 @@ export const site = {
       descriptionEn: "Transportation/limo service site with booking and contact CTAs.",
       href: "https://longislandexpresslimo.com/",
       domain: "longislandexpresslimo.com",
+      country: "OTHER"
+    },
+    {
+      title: "Pflegewerk Mannheim",
+      descriptionTr: "Almanya odaklı bakım hizmetleri sitesi; sade navigasyon ve hızlı iletişim akışı.",
+      descriptionEn: "Germany-focused care services website with clean navigation and fast contact flow.",
+      href: "https://www.pflegewerk-ma.de",
+      domain: "pflegewerk-ma.de",
+      country: "OTHER"
+    },
+    {
+      title: "PflegeAnker",
+      descriptionTr: "Bakım hizmetleri için kurumsal vitrin; hizmet sayfaları ve dönüşüm odaklı CTA’lar.",
+      descriptionEn: "Care services site with service pages and conversion-oriented CTAs.",
+      href: "https://www.pflegeanker.com",
+      domain: "pflegeanker.com",
+      country: "OTHER"
+    },
+    {
+      title: "Creavision",
+      descriptionTr: "Ajans/şirket web sitesi; hizmetler ve marka iletişimi odaklı yapı.",
+      descriptionEn: "Agency/company website focused on services and brand communication.",
+      href: "https://creavision.de",
+      domain: "creavision.de",
+      country: "OTHER"
+    },
+    {
+      title: "Nexova",
+      descriptionTr: "Kurumsal tanıtım; hizmet sayfaları ve SEO uyumlu içerik düzeni.",
+      descriptionEn: "Corporate website with service pages and SEO-friendly content structure.",
+      href: "https://www.nexova.com.tr/",
+      domain: "nexova.com.tr",
+      country: "OTHER"
+    },
+    {
+      title: "SolarPreisVergleich",
+      descriptionTr: "Karşılaştırma odaklı site; kategori sayfaları ve hızlı keşif akışı.",
+      descriptionEn: "Comparison-focused website with category pages and a fast discovery flow.",
+      href: "https://www.solarpreisvergleich.de/",
+      domain: "solarpreisvergleich.de",
+      country: "OTHER"
+    },
+    {
+      title: "PD Leads",
+      descriptionTr: "Lead toplama odaklı landing yapısı; sade form akışı ve performans optimizasyonu.",
+      descriptionEn: "Lead-generation landing structure with streamlined forms and performance tuning.",
+      href: "https://www.pd-leads.de/",
+      domain: "pd-leads.de",
+      country: "OTHER"
+    },
+    {
+      title: "Rosenstock Pflege",
+      descriptionTr: "Bakım hizmetleri sitesi; güven veren tasarım ve iletişim odaklı UX.",
+      descriptionEn: "Care services site with trust-first design and contact-focused UX.",
+      href: "https://www.rosenstock-pflege.de/",
+      domain: "rosenstock-pflege.de",
+      country: "OTHER"
+    },
+    {
+      title: "Innodata",
+      descriptionTr: "Kurumsal site; içerik hiyerarşisi ve hizmet sayfaları ile modern UI.",
+      descriptionEn: "Corporate site with modern UI, service pages and clear content hierarchy.",
+      href: "https://www.innodata.de/",
+      domain: "innodata.de",
+      country: "OTHER"
+    },
+    {
+      title: "Treppenlift Helfer",
+      descriptionTr: "Dönüşüm odaklı hizmet sitesi; landing sayfaları ve hızlı iletişim CTA’ları.",
+      descriptionEn: "Conversion-focused service site with landing pages and quick contact CTAs.",
+      href: "https://www.treppenlifthelfer.de/",
+      domain: "treppenlifthelfer.de",
+      country: "OTHER"
+    },
+    {
+      title: "InoWork",
+      descriptionTr: "Kurumsal tanıtım sitesi; hizmetler ve başvuru/iletişim akışı.",
+      descriptionEn: "Corporate website with services and application/contact flow.",
+      href: "https://www.inowork.com.tr/",
+      domain: "inowork.com.tr",
+      country: "OTHER"
+    },
+    {
+      title: "Hausia",
+      descriptionTr: "Marka sitesi; sade vitrin kurgusu ve modern tipografi.",
+      descriptionEn: "Brand website with a minimal showcase layout and modern typography.",
+      href: "https://hausia.de",
+      domain: "hausia.de",
+      country: "OTHER"
+    },
+    {
+      title: "Nexus Akademie",
+      descriptionTr: "Eğitim/akademi sitesi; program sayfaları ve kayıt yönlendirmeleri.",
+      descriptionEn: "Academy website with program pages and enrollment-oriented flow.",
+      href: "https://nexus-akademie.com/",
+      domain: "nexus-akademie.com",
+      country: "OTHER"
+    },
+    {
+      title: "Nexdata",
+      descriptionTr: "Kurumsal data/teknoloji sitesi; ürün/hizmet tanıtımı ve net IA.",
+      descriptionEn: "Data/tech corporate site with product/service pages and clear IA.",
+      href: "https://www.nexdata.de/",
+      domain: "nexdata.de",
+      country: "OTHER"
+    },
+    {
+      title: "Medica Box",
+      descriptionTr: "Medikal ürün sitesi; ürün vitrini ve içerik odaklı sayfalar.",
+      descriptionEn: "Medical products website with product showcase and content pages.",
+      href: "https://www.medica-box.de/",
+      domain: "medica-box.de",
+      country: "OTHER"
+    },
+    {
+      title: "InoBau",
+      descriptionTr: "İnşaat/kurumsal site; proje/hizmet tanıtımı ve iletişim akışı.",
+      descriptionEn: "Construction/corporate site with project/service pages and contact flow.",
+      href: "https://www.inobau.de/",
+      domain: "inobau.de",
+      country: "OTHER"
+    },
+    {
+      title: "Medikids",
+      descriptionTr: "Sağlık/klinik odaklı site; bilgilendirme ve randevu/iletişim yönlendirmeleri.",
+      descriptionEn: "Healthcare/clinic site with informative pages and contact/appointment flow.",
+      href: "https://www.medikids.de",
+      domain: "medikids.de",
+      country: "OTHER"
+    },
+    {
+      title: "Hazar Totos",
+      descriptionTr: "Kurumsal tanıtım; hızlı, sade ve mobil uyumlu yapı.",
+      descriptionEn: "Corporate website with a fast, minimal, mobile-friendly build.",
+      href: "https://hazartotos.com",
+      domain: "hazartotos.com",
+      country: "OTHER"
+    },
+    {
+      title: "Inovia Medical",
+      descriptionTr: "Medikal marka sitesi; ürün/hizmet vitrin yapısı ve güven odaklı tasarım.",
+      descriptionEn: "Medical brand site with product/service showcase and trust-first design.",
+      href: "https://inovia-medical.de",
+      domain: "inovia-medical.de",
+      country: "OTHER"
+    },
+    {
+      title: "Solarbund",
+      descriptionTr: "Enerji topluluğu/kurumsal site; içerik sayfaları ve SEO düzeni.",
+      descriptionEn: "Energy community/corporate website with content pages and SEO structure.",
+      href: "https://www.solarbund.com",
+      domain: "solarbund.com",
       country: "OTHER"
     }
   ] satisfies ReferenceItem[],

@@ -22,6 +22,37 @@ const pageTitle = lang === "tr" ? "Hakkımda" : "About";
 
     <div class="grid gap-6 lg:grid-cols-12">
       <div class="lg:col-span-7">
+        <div id="resume" class="mb-6">
+          <SectionCard title={lang === "tr" ? "Özgeçmişim" : "Resume"}>
+            <div class="grid gap-3">
+              {site.resume.map((r) => (
+                <div class="flex gap-3 rounded-xl border border-slate-200 bg-white p-4">
+                  <div class="mt-0.5 inline-flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-slate-900 text-white">
+                    {r.companyShort ? (
+                      <span class="text-sm font-bold">{r.companyShort}</span>
+                    ) : (
+                      <Icon name={r.icon ?? "briefcase"} class="h-5 w-5" />
+                    )}
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <div class="font-bold">{r.title}</div>
+                      <div class="text-xs font-semibold text-slate-500">{r.range}</div>
+                    </div>
+                    <div class="mt-0.5 text-sm text-slate-600">{r.company}</div>
+                    {(r.employmentType || r.location) && (
+                      <div class="mt-1 text-xs text-slate-500">
+                        {[r.employmentType, r.location].filter(Boolean).join(" • ")}
+                      </div>
+                    )}
+                    {r.description && <div class="mt-1 text-sm text-slate-600">{r.description}</div>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+
         <SectionCard title={lang === "tr" ? "Profil" : "Profile"}>
           <div class="prose prose-slate max-w-none">
             {(lang === "tr" ? site.hero.bioTr : site.hero.bioEn).map((p) => (
