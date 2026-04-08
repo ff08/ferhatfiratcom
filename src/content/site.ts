@@ -52,6 +52,9 @@ export type ReferenceItem = {
   href: string;
   domain?: string;
   country?: "TR" | "OTHER";
+  /** Used to group non-TR references on the references page */
+  regionTr?: string;
+  regionEn?: string;
 };
 
 export const site = {
@@ -736,12 +739,116 @@ export const site = {
       country: "TR"
     },
     {
+      title: "Studio ByLamp",
+      descriptionTr: "Kurumsal web sitesi; marka iletişimi ve lead odaklı yapı.",
+      descriptionEn: "Corporate website with brand communication and a lead-focused structure.",
+      href: "https://bylamp.com",
+      domain: "bylamp.com",
+      country: "TR"
+    },
+    {
+      title: "AIKA Concept",
+      descriptionTr: "Kurumsal tanıtım sitesi; ürün/hizmet vitrin yapısı.",
+      descriptionEn: "Corporate website with a clear product/service showcase.",
+      href: "https://aikaconcept.com",
+      domain: "aikaconcept.com",
+      country: "TR"
+    },
+    {
+      title: "MZL Dental Klinik",
+      descriptionTr: "Diş kliniği tanıtım sitesi; hizmet sayfaları ve randevu odaklı akış.",
+      descriptionEn: "Dental clinic website with service pages and appointment-oriented flow.",
+      href: "https://mzldentalklinik.com",
+      domain: "mzldentalklinik.com",
+      country: "TR"
+    },
+    {
+      title: "Larimar Bodrum",
+      descriptionTr: "Konaklama / turizm odaklı site; vitrin sayfaları ve iletişim CTA’ları.",
+      descriptionEn: "Hospitality/tourism site with showcase pages and contact CTAs.",
+      href: "https://larimarbodrum.com",
+      domain: "larimarbodrum.com",
+      country: "TR"
+    },
+    {
       title: "Long Island Express Limo",
       descriptionTr: "Ulaşım/limuzin hizmet sitesi; rezervasyon ve iletişim CTA’ları.",
       descriptionEn: "Transportation/limo service site with booking and contact CTAs.",
       href: "https://longislandexpresslimo.com/",
       domain: "longislandexpresslimo.com",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "ABD",
+      regionEn: "United States"
+    },
+    {
+      title: "Coverite",
+      descriptionTr: "Avustralya odaklı kurumsal/ürün vitrin sitesi.",
+      descriptionEn: "Australia-focused corporate/product showcase website.",
+      href: "https://coverite.com.au/",
+      domain: "coverite.com.au",
+      country: "OTHER",
+      regionTr: "Avustralya",
+      regionEn: "Australia"
+    },
+    {
+      title: "Healthy Mummy Wellness",
+      descriptionTr: "Wellness odaklı tanıtım sitesi; sade içerik ve iletişim akışı.",
+      descriptionEn: "Wellness-focused marketing site with clean content and contact flow.",
+      href: "https://healthymummywellness.com/",
+      domain: "healthymummywellness.com",
+      country: "OTHER",
+      regionTr: "Avustralya",
+      regionEn: "Australia"
+    },
+    {
+      title: "Supporters",
+      descriptionTr: "Danimarka odaklı kurumsal site; net bilgi mimarisi.",
+      descriptionEn: "Denmark-focused corporate site with clear information architecture.",
+      href: "https://supporters.dk",
+      domain: "supporters.dk",
+      country: "OTHER",
+      regionTr: "Danimarka",
+      regionEn: "Denmark"
+    },
+    {
+      title: "Satisfix",
+      descriptionTr: "Tunus pazarına yönelik kurumsal vitrin ve iletişim odaklı yapı.",
+      descriptionEn: "Corporate showcase and contact-focused structure for the Tunisia market.",
+      href: "https://satisfix.fr/",
+      domain: "satisfix.fr",
+      country: "OTHER",
+      regionTr: "Tunus",
+      regionEn: "Tunisia"
+    },
+    {
+      title: "12 Restoran",
+      descriptionTr: "Restoran vitrin sitesi; menü ve iletişim odaklı kullanıcı deneyimi.",
+      descriptionEn: "Restaurant showcase site with menu and contact-first UX.",
+      href: "https://12restoran.az",
+      domain: "12restoran.az",
+      country: "OTHER",
+      regionTr: "Azerbaycan",
+      regionEn: "Azerbaijan"
+    },
+    {
+      title: "Serpa",
+      descriptionTr: "Kurumsal tanıtım sitesi; hizmet sayfaları ve güven veren tasarım.",
+      descriptionEn: "Corporate website with service pages and a trust-first design.",
+      href: "https://serpa.az",
+      domain: "serpa.az",
+      country: "OTHER",
+      regionTr: "Azerbaycan",
+      regionEn: "Azerbaijan"
+    },
+    {
+      title: "Megixy",
+      descriptionTr: "Polonya odaklı kurumsal site; ürün/hizmet vitrin yapısı.",
+      descriptionEn: "Poland-focused corporate site with product/service showcase.",
+      href: "https://megixy.com/",
+      domain: "megixy.com",
+      country: "OTHER",
+      regionTr: "Polanya",
+      regionEn: "Poland"
     },
     {
       title: "Pflegewerk Mannheim",
@@ -749,7 +856,9 @@ export const site = {
       descriptionEn: "Germany-focused care services website with clean navigation and fast contact flow.",
       href: "https://www.pflegewerk-ma.de",
       domain: "pflegewerk-ma.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "PflegeAnker",
@@ -757,7 +866,9 @@ export const site = {
       descriptionEn: "Care services site with service pages and conversion-oriented CTAs.",
       href: "https://www.pflegeanker.com",
       domain: "pflegeanker.com",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Creavision",
@@ -765,7 +876,9 @@ export const site = {
       descriptionEn: "Agency/company website focused on services and brand communication.",
       href: "https://creavision.de",
       domain: "creavision.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Nexova",
@@ -773,7 +886,7 @@ export const site = {
       descriptionEn: "Corporate website with service pages and SEO-friendly content structure.",
       href: "https://www.nexova.com.tr/",
       domain: "nexova.com.tr",
-      country: "OTHER"
+      country: "TR"
     },
     {
       title: "SolarPreisVergleich",
@@ -781,7 +894,9 @@ export const site = {
       descriptionEn: "Comparison-focused website with category pages and a fast discovery flow.",
       href: "https://www.solarpreisvergleich.de/",
       domain: "solarpreisvergleich.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "PD Leads",
@@ -789,7 +904,9 @@ export const site = {
       descriptionEn: "Lead-generation landing structure with streamlined forms and performance tuning.",
       href: "https://www.pd-leads.de/",
       domain: "pd-leads.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Rosenstock Pflege",
@@ -797,7 +914,9 @@ export const site = {
       descriptionEn: "Care services site with trust-first design and contact-focused UX.",
       href: "https://www.rosenstock-pflege.de/",
       domain: "rosenstock-pflege.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Innodata",
@@ -805,7 +924,9 @@ export const site = {
       descriptionEn: "Corporate site with modern UI, service pages and clear content hierarchy.",
       href: "https://www.innodata.de/",
       domain: "innodata.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Treppenlift Helfer",
@@ -813,7 +934,9 @@ export const site = {
       descriptionEn: "Conversion-focused service site with landing pages and quick contact CTAs.",
       href: "https://www.treppenlifthelfer.de/",
       domain: "treppenlifthelfer.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "InoWork",
@@ -821,7 +944,7 @@ export const site = {
       descriptionEn: "Corporate website with services and application/contact flow.",
       href: "https://www.inowork.com.tr/",
       domain: "inowork.com.tr",
-      country: "OTHER"
+      country: "TR"
     },
     {
       title: "Hausia",
@@ -829,7 +952,9 @@ export const site = {
       descriptionEn: "Brand website with a minimal showcase layout and modern typography.",
       href: "https://hausia.de",
       domain: "hausia.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Nexus Akademie",
@@ -837,7 +962,9 @@ export const site = {
       descriptionEn: "Academy website with program pages and enrollment-oriented flow.",
       href: "https://nexus-akademie.com/",
       domain: "nexus-akademie.com",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Nexdata",
@@ -845,7 +972,9 @@ export const site = {
       descriptionEn: "Data/tech corporate site with product/service pages and clear IA.",
       href: "https://www.nexdata.de/",
       domain: "nexdata.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Medica Box",
@@ -853,7 +982,9 @@ export const site = {
       descriptionEn: "Medical products website with product showcase and content pages.",
       href: "https://www.medica-box.de/",
       domain: "medica-box.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "InoBau",
@@ -861,7 +992,9 @@ export const site = {
       descriptionEn: "Construction/corporate site with project/service pages and contact flow.",
       href: "https://www.inobau.de/",
       domain: "inobau.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Medikids",
@@ -869,7 +1002,9 @@ export const site = {
       descriptionEn: "Healthcare/clinic site with informative pages and contact/appointment flow.",
       href: "https://www.medikids.de",
       domain: "medikids.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Hazar Totos",
@@ -877,7 +1012,7 @@ export const site = {
       descriptionEn: "Corporate website with a fast, minimal, mobile-friendly build.",
       href: "https://hazartotos.com",
       domain: "hazartotos.com",
-      country: "OTHER"
+      country: "TR"
     },
     {
       title: "Inovia Medical",
@@ -885,7 +1020,9 @@ export const site = {
       descriptionEn: "Medical brand site with product/service showcase and trust-first design.",
       href: "https://inovia-medical.de",
       domain: "inovia-medical.de",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     },
     {
       title: "Solarbund",
@@ -893,7 +1030,9 @@ export const site = {
       descriptionEn: "Energy community/corporate website with content pages and SEO structure.",
       href: "https://www.solarbund.com",
       domain: "solarbund.com",
-      country: "OTHER"
+      country: "OTHER",
+      regionTr: "Almanya",
+      regionEn: "Germany"
     }
   ] satisfies ReferenceItem[],
   footer: {

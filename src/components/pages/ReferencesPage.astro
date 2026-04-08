@@ -29,6 +29,62 @@ function pseudoYears(seed: string): number {
 
 const trRefs = site.references.filter((r) => r.country !== "OTHER");
 const otherRefs = site.references.filter((r) => r.country === "OTHER");
+
+const intlSectionTitle = lang === "tr" ? "Almanya" : "Germany";
+const regionOrder =
+  lang === "tr"
+    ? (["Almanya", "Avustralya", "Danimarka", "Tunus", "Azerbaycan", "Polanya", "ABD"] as const)
+    : (["Germany", "Australia", "Denmark", "Tunisia", "Azerbaijan", "Poland", "United States"] as const);
+
+const refsByRegion = new Map<string, typeof otherRefs>();
+for (const r of otherRefs) {
+  const k = lang === "tr" ? r.regionTr ?? "Diğer" : r.regionEn ?? "Other";
+  const list = refsByRegion.get(k) ?? [];
+  list.push(r);
+  refsByRegion.set(k, list);
+}
+
+/** Stable filter value for client-side filtering (English keys in data) */
+const REGION_SLUG_BY_EN: Record<string, string> = {
+  Germany: "germany",
+  Australia: "australia",
+  Denmark: "denmark",
+  Tunisia: "tunisia",
+  Azerbaijan: "azerbaijan",
+  Poland: "poland",
+  "United States": "united-states",
+};
+
+function filterSlug(r: (typeof site.references)[number]): string {
+  if (r.country !== "OTHER") return "turkey";
+  const slug = REGION_SLUG_BY_EN[r.regionEn ?? ""];
+  return slug ?? "other";
+}
+
+function searchBlob(r: (typeof site.references)[number]): string {
+  const parts = [
+    r.title,
+    r.domain ?? "",
+    r.href,
+    r.descriptionTr ?? "",
+    r.descriptionEn ?? "",
+    safeHost(r.href),
+  ];
+  return parts.join(" ").toLowerCase();
+}
+
+const filterOrder = ["all", "turkey", "germany", "australia", "denmark", "tunisia", "azerbaijan", "poland", "united-states"] as const;
+const filterLabels: Record<(typeof filterOrder)[number], { tr: string; en: string }> = {
+  all: { tr: "Tüm ülkeler", en: "All countries" },
+  turkey: { tr: "Türkiye", en: "Turkey" },
+  germany: { tr: "Almanya", en: "Germany" },
+  australia: { tr: "Avustralya", en: "Australia" },
+  denmark: { tr: "Danimarka", en: "Denmark" },
+  tunisia: { tr: "Tunus", en: "Tunisia" },
+  azerbaijan: { tr: "Azerbaycan", en: "Azerbaijan" },
+  poland: { tr: "Polanya", en: "Poland" },
+  "united-states": { tr: "ABD", en: "United States" },
+};
 ---
 
 <Layout title={pageTitle} lang={lang}>
@@ -46,10 +102,50 @@ const otherRefs = site.references.filter((r) => r.country === "OTHER");
       </p>
     </div>
 
+    <div class="card mb-6 flex flex-col gap-3 p-4 sm:flex-row sm:items-end sm:justify-between">
+      <div class="min-w-0 flex-1">
+        <label for="ref-search" class="mb-1 block text-xs font-semibold text-slate-600">
+          {lang === "tr" ? "Ara" : "Search"}
+        </label>
+        <input
+          id="ref-search"
+          type="search"
+          data-ref-search
+          class="focus-ring w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400"
+          placeholder={lang === "tr" ? "Site adı, alan adı veya açıklama…" : "Site name, domain, or description…"}
+          autocomplete="off"
+        />
+      </div>
+      <div class="w-full sm:w-64">
+        <label for="ref-country" class="mb-1 block text-xs font-semibold text-slate-600">
+          {lang === "tr" ? "Ülke / bölge" : "Country / region"}
+        </label>
+        <select
+          id="ref-country"
+          data-ref-country
+          class="focus-ring w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900"
+        >
+          {filterOrder.map((key) => (
+            <option value={key}>{filterLabels[key][lang === "tr" ? "tr" : "en"]}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <p class="mb-4 hidden text-sm text-slate-600" data-ref-empty>
+      {lang === "tr" ? "Bu filtrelere uygun referans bulunamadı." : "No references match your filters."}
+    </p>
+
+    <div data-ref-page-section="turkey">
     <SectionCard title={lang === "tr" ? "Türkiye" : "Turkey"}>
       <div class="grid gap-4 sm:grid-cols-2">
         {trRefs.map((r) => (
-          <div class="rounded-2xl border border-slate-200 bg-white p-5">
+          <div
+            class="rounded-2xl border border-slate-200 bg-white p-5"
+            data-reference-card
+            data-region={filterSlug(r)}
+            data-search={searchBlob(r)}
+          >
             <div class="min-w-0">
               <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                 <div class="font-extrabold tracking-tight">{r.title}</div>
@@ -81,42 +177,62 @@ const otherRefs = site.references.filter((r) => r.country === "OTHER");
         ))}
       </div>
     </SectionCard>
+    </div>
 
     {otherRefs.length > 0 && (
-      <div class="mt-6">
-        <SectionCard title={lang === "tr" ? "Diğer ülkeler" : "Other countries"}>
-          <div class="grid gap-4 sm:grid-cols-2">
-            {otherRefs.map((r) => (
-              <div class="rounded-2xl border border-slate-200 bg-white p-5">
-                <div class="min-w-0">
-                  <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                    <div class="font-extrabold tracking-tight">{r.title}</div>
-                    <div class="inline-flex items-center gap-2 self-start rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
-                      <span class="relative inline-flex h-2.5 w-2.5 items-center justify-center">
-                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-30"></span>
-                        <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-                      </span>
-                      <span>{lang === "tr" ? `${pseudoYears(r.title)} yıldır aktif` : `${pseudoYears(r.title)} years active`}</span>
-                    </div>
-                  </div>
-                  {(lang === "tr" ? r.descriptionTr : r.descriptionEn) && (
-                    <div class="mt-1 text-sm text-slate-600">{lang === "tr" ? r.descriptionTr : r.descriptionEn}</div>
+      <div class="mt-6" data-ref-page-section="intl">
+        <SectionCard title={intlSectionTitle}>
+          <div class="space-y-8">
+            {regionOrder.map((regionKey) => {
+              const group = refsByRegion.get(regionKey);
+              if (!group?.length) return null;
+              const showRegionHeading = regionKey !== intlSectionTitle;
+              return (
+                <div class="space-y-4" data-ref-group>
+                  {showRegionHeading && (
+                    <h3 class="text-xs font-semibold uppercase tracking-wide text-slate-500">{regionKey}</h3>
                   )}
-                  <div class="mt-2 break-all text-xs font-semibold text-slate-500">{r.domain ?? safeHost(r.href)}</div>
-                </div>
+                  <div class="grid gap-4 sm:grid-cols-2">
+                    {group.map((r) => (
+                      <div
+                        class="rounded-2xl border border-slate-200 bg-white p-5"
+                        data-reference-card
+                        data-region={filterSlug(r)}
+                        data-search={searchBlob(r)}
+                      >
+                        <div class="min-w-0">
+                          <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                            <div class="font-extrabold tracking-tight">{r.title}</div>
+                            <div class="inline-flex items-center gap-2 self-start rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
+                              <span class="relative inline-flex h-2.5 w-2.5 items-center justify-center">
+                                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-30"></span>
+                                <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                              </span>
+                              <span>{lang === "tr" ? `${pseudoYears(r.title)} yıldır aktif` : `${pseudoYears(r.title)} years active`}</span>
+                            </div>
+                          </div>
+                          {(lang === "tr" ? r.descriptionTr : r.descriptionEn) && (
+                            <div class="mt-1 text-sm text-slate-600">{lang === "tr" ? r.descriptionTr : r.descriptionEn}</div>
+                          )}
+                          <div class="mt-2 break-all text-xs font-semibold text-slate-500">{r.domain ?? safeHost(r.href)}</div>
+                        </div>
 
-                <div class="mt-4 flex flex-wrap gap-4">
-                  <a class="focus-ring inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900" href={r.href} target="_blank" rel="noreferrer">
-                    <Icon name="external" class="h-4 w-4" />
-                    <span>{t.actions.openSite}</span>
-                  </a>
-                  <button type="button" class="focus-ring inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900" data-copy-link={r.href}>
-                    <Icon name="copy" class="h-4 w-4" />
-                    <span data-copy-text>{t.actions.copyLink}</span>
-                  </button>
+                        <div class="mt-4 flex flex-wrap gap-4">
+                          <a class="focus-ring inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900" href={r.href} target="_blank" rel="noreferrer">
+                            <Icon name="external" class="h-4 w-4" />
+                            <span>{t.actions.openSite}</span>
+                          </a>
+                          <button type="button" class="focus-ring inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900" data-copy-link={r.href}>
+                            <Icon name="copy" class="h-4 w-4" />
+                            <span data-copy-text>{t.actions.copyLink}</span>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </SectionCard>
       </div>
@@ -146,6 +262,43 @@ const otherRefs = site.references.filter((r) => r.country === "OTHER");
               }
             });
           });
+
+          const searchEl = document.querySelector("[data-ref-search]");
+          const countryEl = document.querySelector("[data-ref-country]");
+          const emptyEl = document.querySelector("[data-ref-empty]");
+          const cards = Array.from(document.querySelectorAll("[data-reference-card]"));
+          if (!searchEl || !countryEl || !emptyEl || !cards.length) return;
+
+          const apply = () => {
+            const q = (searchEl.value || "").toLowerCase().trim();
+            const region = countryEl.value || "all";
+            let any = false;
+            cards.forEach((card) => {
+              const blob = (card.getAttribute("data-search") || "").toLowerCase();
+              const r = card.getAttribute("data-region") || "";
+              const matchQ = !q || blob.includes(q);
+              const matchR = region === "all" || r === region;
+              const show = matchQ && matchR;
+              card.classList.toggle("hidden", !show);
+              if (show) any = true;
+            });
+
+            document.querySelectorAll("[data-ref-group]").forEach((g) => {
+              const vis = g.querySelector("[data-reference-card]:not(.hidden)");
+              g.classList.toggle("hidden", !vis);
+            });
+
+            document.querySelectorAll("[data-ref-page-section]").forEach((wrap) => {
+              const vis = wrap.querySelector("[data-reference-card]:not(.hidden)");
+              wrap.classList.toggle("hidden", !vis);
+            });
+
+            emptyEl.classList.toggle("hidden", any);
+          };
+
+          searchEl.addEventListener("input", apply);
+          countryEl.addEventListener("change", apply);
+          apply();
         });
       </script>
   </main>
