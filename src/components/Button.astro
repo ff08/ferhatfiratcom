@@ -1,0 +1,31 @@
+---
+const {
+  href,
+  label,
+  variant = "primary",
+  iconRight,
+  target,
+  rel,
+} = Astro.props as {
+  href: string;
+  label: string;
+  variant?: "primary" | "ghost";
+  iconRight?: "external" | "chevron-right";
+  target?: string;
+  rel?: string;
+};
+
+const base =
+  "focus-ring inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition";
+
+const styles =
+  variant === "primary"
+    ? "bg-slate-900 text-white hover:bg-slate-800"
+    : "border border-slate-200 bg-white text-slate-900 hover:bg-slate-50";
+---
+
+<a class={`${base} ${styles}`} href={href} target={target} rel={rel}>
+  <span>{label}</span>
+  {iconRight && <span class="text-current"><slot /></span>}
+</a>
+

@@ -1,0 +1,47 @@
+---
+import { site } from "../content/site";
+import Icon from "./Icon.astro";
+import { switchLangPath, type Lang, ui } from "../content/i18n";
+
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+const currentPath = Astro.url.pathname;
+---
+
+<header class="pt-6">
+  <div class="container flex items-center justify-between">
+    <a class="focus-ring rounded-lg text-sm font-semibold text-slate-900" href={`mailto:${t.nav.email}`}>
+      {t.nav.email}
+    </a>
+
+    <nav class="flex items-center gap-2">
+      <a class="focus-ring rounded-lg p-2 text-slate-600 hover:bg-slate-100" href="https://www.linkedin.com/in/ferhatfirat/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+        <Icon name="linkedin" class="h-5 w-5" />
+      </a>
+      <a class="focus-ring rounded-lg p-2 text-slate-600 hover:bg-slate-100" href="https://instagram.com/_ferhatfirat" target="_blank" rel="noreferrer" aria-label="Instagram">
+        <Icon name="instagram" class="h-5 w-5" />
+      </a>
+      <a class="focus-ring rounded-lg p-2 text-slate-600 hover:bg-slate-100" href="https://upcard.me/ferhat" target="_blank" rel="noreferrer" aria-label="UpCard">
+        <Icon name="link" class="h-5 w-5" />
+      </a>
+
+      <span class="mx-1 h-5 w-px bg-slate-200"></span>
+
+      <a
+        class={`focus-ring rounded-lg px-2 py-1 text-xs font-semibold ${lang === "tr" ? "bg-slate-900 text-white" : "text-slate-700 hover:bg-slate-100"}`}
+        href={switchLangPath(currentPath, "tr")}
+        hreflang="tr"
+      >
+        {t.nav.langTr}
+      </a>
+      <a
+        class={`focus-ring rounded-lg px-2 py-1 text-xs font-semibold ${lang === "en" ? "bg-slate-900 text-white" : "text-slate-700 hover:bg-slate-100"}`}
+        href={switchLangPath(currentPath, "en")}
+        hreflang="en"
+      >
+        {t.nav.langEn}
+      </a>
+    </nav>
+  </div>
+</header>
+

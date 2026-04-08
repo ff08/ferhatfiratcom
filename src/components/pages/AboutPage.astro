@@ -1,0 +1,133 @@
+---
+import Layout from "../Layout.astro";
+import TopNav from "../TopNav.astro";
+import Footer from "../Footer.astro";
+import SectionCard from "../SectionCard.astro";
+import Icon from "../Icon.astro";
+import { site } from "../../content/site";
+import { ui, type Lang } from "../../content/i18n";
+
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+const pageTitle = lang === "tr" ? "Hakkımda" : "About";
+---
+
+<Layout title={pageTitle} lang={lang}>
+  <TopNav lang={lang} />
+  <main class="container mt-10">
+    <div class="mb-8">
+      <h1>{pageTitle}</h1>
+      <p class="mt-3 max-w-3xl text-slate-600">{site.hero.mission}</p>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <SectionCard title={lang === "tr" ? "Profil" : "Profile"}>
+          <div class="prose prose-slate max-w-none">
+            {(lang === "tr" ? site.hero.bioTr : site.hero.bioEn).map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
+        </SectionCard>
+
+        <div id="projects" class="mt-6">
+          <SectionCard title={lang === "tr" ? "Projeler" : "Projects"}>
+            <div class="grid gap-4 sm:grid-cols-2">
+              {site.projects.map((p) => (
+                <div class="rounded-2xl border border-slate-200 bg-white p-5">
+                  <div class="flex items-start gap-3">
+                    <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl">
+                      {p.logoSrc ? (
+                        <img src={p.logoSrc} alt={`${p.title} logo`} class="h-10 w-10 object-contain" loading="lazy" />
+                      ) : (
+                        <Icon name={p.icon} class="h-8 w-8 text-slate-700" />
+                      )}
+                    </div>
+                    <div>
+                      <div class="text-base font-semibold tracking-tight text-slate-900">{p.title}</div>
+                      {p.tagline && <div class="mt-1 text-sm font-medium text-slate-600">{p.tagline}</div>}
+                      <div class="mt-2 text-sm text-slate-600">{p.description}</div>
+                      {p.domain && <div class="mt-2 text-xs font-semibold text-slate-500">{p.domain}</div>}
+                      {p.href && (
+                        <a
+                          class="focus-ring mt-3 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-50"
+                          href={p.href}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <span>{lang === "tr" ? "Görüntüle" : "View"}</span>
+                          <Icon name="external" class="h-4 w-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+
+        <div id="articles" class="mt-6">
+          <SectionCard title={lang === "tr" ? "Haberler & Yazılar" : "News & Articles"}>
+            <div class="divide-y divide-slate-200">
+              {site.articles.map((a) => (
+                <div class="py-3">
+                  <div class="text-sm font-semibold text-slate-900">{a.title}</div>
+                  <div class="mt-1 flex items-center gap-2 text-xs text-slate-500">
+                    <span class="rounded-full bg-slate-100 px-2 py-0.5 font-semibold text-slate-700">{a.category}</span>
+                    <span>{a.date}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      </div>
+
+      <aside class="lg:col-span-5">
+        <SectionCard title={lang === "tr" ? "Öne çıkanlar" : "Highlights"}>
+          <ul class="space-y-3 text-sm text-slate-700">
+            <li class="flex gap-2">
+              <span class="mt-0.5 text-sky-700"><Icon name="spark" class="h-5 w-5" /></span>
+              <span><strong>6+ yıl</strong> WordPress, <strong>3+ yıl</strong> SEO</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="mt-0.5 text-sky-700"><Icon name="briefcase" class="h-5 w-5" /></span>
+              <span><strong>Lead</strong> • UI/UX, görsel kimlik, mentorluk</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="mt-0.5 text-sky-700"><Icon name="badge" class="h-5 w-5" /></span>
+              <span><strong>No-code / Low-code</strong> ile hızlı üretim</span>
+            </li>
+          </ul>
+
+          <div class="mt-5 flex flex-wrap gap-2">
+            {site.socials.map((s) => (
+              <a
+                class="focus-ring inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50"
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Icon name={s.icon} class="h-5 w-5" />
+                <span>{s.label}</span>
+              </a>
+            ))}
+          </div>
+        </SectionCard>
+
+        <div class="mt-6">
+          <SectionCard title={t.sections.skills}>
+            <div class="flex flex-wrap gap-2">
+              {site.skills.map((s) => (
+                <span class="pill">{s}</span>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+

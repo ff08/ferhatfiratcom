@@ -1,0 +1,68 @@
+---
+import Layout from "../Layout.astro";
+import TopNav from "../TopNav.astro";
+import Footer from "../Footer.astro";
+import SectionCard from "../SectionCard.astro";
+import { ui, type Lang } from "../../content/i18n";
+
+const { lang } = Astro.props as { lang: Lang };
+const pageTitle = lang === "tr" ? "Politikalar" : "Policies";
+const t = ui[lang];
+---
+
+<Layout title={pageTitle} lang={lang}>
+  <TopNav lang={lang} />
+  <main class="container mt-10">
+    <div class="mb-8">
+      <h1>{pageTitle}</h1>
+      <p class="mt-3 max-w-3xl text-slate-600">
+        {lang === "tr"
+          ? "Bu sayfa temel gizlilik, çerez ve kullanım şartları metinlerini içerir."
+          : "This page contains basic privacy, cookie and terms of use texts."}
+      </p>
+    </div>
+
+    <div class="grid gap-6">
+      <SectionCard title={lang === "tr" ? "Gizlilik Politikası" : "Privacy Policy"}>
+        <div class="prose prose-slate max-w-none">
+          <p>
+            {lang === "tr"
+              ? "Bu web sitesi, iletişim amaçlı paylaştığınız bilgileri (ör. e‑posta) yalnızca size dönüş yapmak için kullanır."
+              : "This website uses any information you share (e.g., email) only to respond to you."}
+          </p>
+        </div>
+      </SectionCard>
+
+      <SectionCard title={lang === "tr" ? "Çerez (Cookie) Politikası" : "Cookie Policy"}>
+        <div class="prose prose-slate max-w-none">
+          <p>
+            {lang === "tr"
+              ? "Site, zorunlu çerezler ve (varsa) performans/analitik çerezleri kullanabilir."
+              : "The site may use essential cookies and (if enabled) performance/analytics cookies."}
+          </p>
+        </div>
+      </SectionCard>
+
+      <SectionCard title={lang === "tr" ? "Kullanım Şartları" : "Terms of Use"}>
+        <div class="prose prose-slate max-w-none">
+          <p>
+            {lang === "tr"
+              ? "Sitedeki içerikler bilgilendirme amaçlıdır. İzinsiz kopyalama/yeniden yayınlama yapılmamalıdır."
+              : "Content is provided for informational purposes. Please do not copy/republish without permission."}
+          </p>
+        </div>
+      </SectionCard>
+
+      <SectionCard title={lang === "tr" ? "İletişim" : "Contact"}>
+        <div class="prose prose-slate max-w-none">
+          <p>
+            {lang === "tr" ? "Sorular için:" : "For questions:"}{" "}
+            <a href={`mailto:${t.nav.email}`}>{t.nav.email}</a>
+          </p>
+        </div>
+      </SectionCard>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+

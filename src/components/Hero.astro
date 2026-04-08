@@ -1,0 +1,94 @@
+---
+import { site } from "../content/site";
+import Icon from "./Icon.astro";
+import { ui, type Lang } from "../content/i18n";
+
+const coverUrl = "/cover.png";
+const avatarUrl = "/avatar.png";
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+---
+
+<section class="container pt-10">
+  <div class="card overflow-hidden">
+    <div class="relative h-44 bg-slate-900">
+      <img
+        src={coverUrl}
+        alt="Cover"
+        class="h-full w-full object-cover"
+        loading="eager"
+        onerror="this.style.display='none'"
+      />
+    </div>
+
+    <div class="relative px-6 pb-7 pt-0 sm:px-8">
+      <div class="-mt-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div class="flex flex-col items-start">
+          <div class="relative h-24 w-24">
+            <div class="h-24 w-24 overflow-hidden rounded-full border-4 border-white bg-slate-100 shadow-soft">
+              <img
+                src={avatarUrl}
+                alt={`${site.name} avatar`}
+                class="h-full w-full rounded-full object-cover"
+                loading="eager"
+                onerror="this.style.display='none'"
+              />
+            </div>
+
+            <!-- Online dot (always on top) -->
+            <span class="pointer-events-none absolute -right-0.5 -top-0.5 z-[9999] inline-flex h-4 w-4 items-center justify-center">
+              <span class="inline-flex h-3 w-3 rounded-full border-2 border-white bg-emerald-500 shadow-md"></span>
+            </span>
+          </div>
+
+          <div class="mt-6">
+            <h1 class="text-2xl font-semibold tracking-tight sm:text-3xl">{t.hero.title}</h1>
+            <div class="mt-2 max-w-2xl text-sm text-slate-600 sm:text-[15px]">{t.hero.subtitle}</div>
+            <div class="mt-4 inline-flex items-center gap-3 text-sm text-slate-900">
+              <img
+                src="https://cdn.prod.website-files.com/65368bb1ddd075f23c278b52/653c12bd3de5f1fe72686cd3_followers-avatar-circle-personalfolio-x-webflow-template.png"
+                alt="Followers avatars"
+                class="h-9 w-auto"
+                loading="lazy"
+              />
+              <span class="font-semibold text-slate-900">{t.followersLabel}</span>
+            </div>
+
+            <div class="mt-4 flex flex-wrap items-center gap-3">
+              <span class="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700">
+                <Icon name="bolt" class="h-4 w-4" />
+                <span>{t.hero.availableNow}</span>
+              </span>
+              <span class="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700">
+                <Icon name="video" class="h-4 w-4" />
+                <span>{t.hero.consultations}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 sm:pb-1">
+          <a
+            class="focus-ring inline-flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900 text-white hover:bg-slate-800"
+            href="mailto:info@ferhatfirat.com"
+            aria-label="Email"
+          >
+            <Icon name="mail" class="h-5 w-5" />
+          </a>
+          <a
+            class="focus-ring inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-soft hover:bg-slate-50"
+            href="https://upcard.me/ferhat"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-slate-900 text-white">
+              <Icon name="briefcase" class="h-4 w-4" />
+            </span>
+            <span>{t.hero.viewPortfolio}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

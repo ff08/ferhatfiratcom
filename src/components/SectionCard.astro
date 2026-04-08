@@ -1,0 +1,25 @@
+---
+const { title, rightLinkLabel, rightLinkHref } = Astro.props as {
+  title: string;
+  rightLinkLabel?: string;
+  rightLinkHref?: string;
+};
+---
+
+<section class="card p-6 sm:p-7">
+  <div class="flex items-start justify-between gap-4">
+    <h2 class="text-base font-semibold tracking-tight">{title}</h2>
+    <div class="flex items-center gap-2">
+      <slot name="right" />
+      {rightLinkLabel && rightLinkHref && (
+        <a class="focus-ring rounded-lg px-2 py-1 text-sm font-semibold text-sky-700 hover:bg-sky-50" href={rightLinkHref}>
+          {rightLinkLabel}
+        </a>
+      )}
+    </div>
+  </div>
+  <div class="mt-4">
+    <slot />
+  </div>
+</section>
+
