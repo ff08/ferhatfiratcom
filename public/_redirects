@@ -1,6 +1,6 @@
-# Netlify-style redirects (safe to keep in repo)
-# Force HTTPS + non-www canonical host
-http://ferhatfirat.com/* https://ferhatfirat.com/:splat 301!
-http://www.ferhatfirat.com/* https://ferhatfirat.com/:splat 301!
-https://www.ferhatfirat.com/* https://ferhatfirat.com/:splat 301!
+# Cloudflare Pages / Workers `_redirects` note:
+# - Destinations must be relative URLs (no `https://...`).
+# - Only these status codes are allowed: 200, 301, 302, 303, 307, 308.
+# - Host-level redirects (www → apex) and HTTP → HTTPS should be configured in Cloudflare
+#   (Redirect Rules / Bulk Redirects / Always Use HTTPS), not here.
 
