@@ -9,17 +9,15 @@ type Marker = { label: string; x: number; y: number; xMd: number; yMd: number };
 // Minimal, stylized "map" canvas (not geospatially accurate).
 // Coordinates are percentages. Narrow viewports use looser spacing so pins do not crowd.
 const markers: Marker[] = [
-  { label: "Mannheim", x: 14, y: 30, xMd: 24, yMd: 38 },
-  { label: "İzmir", x: 44, y: 56, xMd: 58, yMd: 58 },
-  { label: "Antalya", x: 52, y: 78, xMd: 67, yMd: 76 },
-  { label: "Ankara", x: 84, y: 44, xMd: 75, yMd: 52 }
+  { label: "İzmir", x: 38, y: 56, xMd: 50, yMd: 58 },
+  { label: "Antalya", x: 52, y: 78, xMd: 62, yMd: 76 },
+  { label: "Ankara", x: 78, y: 44, xMd: 72, yMd: 52 }
 ];
 
 const companiesByCity: Record<string, string> = {
-  Mannheim: "Creavision GmbH",
   Antalya: "Innodata GmbH",
   "İzmir": "Creaforce Yazılım",
-  Ankara: "Here now"
+  Ankara: lang === "tr" ? "Bireysel mentörlük" : "Independent mentoring"
 };
 ---
 
@@ -49,7 +47,7 @@ const companiesByCity: Record<string, string> = {
   </div>
 
   <div class="border-t border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 sm:px-5">
-    {t.sections.location}: Ankara • Antalya • Mannheim • İzmir
+    {t.sections.location}: Ankara • Antalya • İzmir
   </div>
 </div>
 

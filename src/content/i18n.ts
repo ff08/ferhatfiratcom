@@ -13,10 +13,11 @@ export const ui = {
     },
     hero: {
       title: "Ben Ferhat FIRAT",
-      subtitle: "Lead Web Designer • No-Code & Low-Code Expert • Brand Growth & Digital Innovation",
+      subtitle:
+        "Lead Web Designer | UpCard Co-Founder | Orion Tekmer Mentor | Brizy Mentor | Türkiye No Code & Low Code & Vibe Code Community",
       viewPortfolio: "Portfolyoyu görüntüle",
       availableNow: "Şu an müsait",
-      consultations: "Danışmanlık veriyorum",
+      consultations: "Bireysel mentörlük veriyorum",
     },
     sections: {
       about: "Hakkımda",
@@ -59,10 +60,11 @@ export const ui = {
     },
     hero: {
       title: "I’m Ferhat FIRAT",
-      subtitle: "Lead Web Designer • No-Code & Low-Code Expert • Brand Growth & Digital Innovation",
+      subtitle:
+        "Lead Web Designer | UpCard Co-Founder | Orion Tekmer Mentor | Brizy Mentor | Türkiye No Code & Low Code & Vibe Code Community",
       viewPortfolio: "View portfolio",
       availableNow: "Available now",
-      consultations: "Offers consultations",
+      consultations: "Independent mentoring",
     },
     sections: {
       about: "About me",

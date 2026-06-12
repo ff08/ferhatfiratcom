@@ -6,7 +6,7 @@ import SectionCard from "../SectionCard.astro";
 import GlobalCta from "../GlobalCta.astro";
 import Breadcrumb from "../Breadcrumb.astro";
 import Icon from "../Icon.astro";
-import { site } from "../../content/site";
+import { resumeField, site } from "../../content/site";
 import { ui, type Lang } from "../../content/i18n";
 
 const { lang } = Astro.props as { lang: Lang };
@@ -51,16 +51,16 @@ const pageTitle = lang === "tr" ? "Hakkımda" : "About";
                   </div>
                   <div class="min-w-0 flex-1">
                     <div class="grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3">
-                      <div class="min-w-0 font-bold">{r.title}</div>
-                      <div class="shrink-0 whitespace-nowrap text-right text-xs font-semibold tabular-nums text-slate-500">{r.range}</div>
+                      <div class="min-w-0 font-bold">{resumeField(r, lang, "title")}</div>
+                      <div class="shrink-0 whitespace-nowrap text-right text-xs font-semibold tabular-nums text-slate-500">{resumeField(r, lang, "range")}</div>
                     </div>
-                    <div class="mt-0.5 text-sm text-slate-600">{r.company}</div>
-                    {(r.employmentType || r.location) && (
+                    <div class="mt-0.5 text-sm text-slate-600">{resumeField(r, lang, "company")}</div>
+                    {(resumeField(r, lang, "employmentType") || resumeField(r, lang, "location")) && (
                       <div class="mt-1 text-xs text-slate-500">
-                        {[r.employmentType, r.location].filter(Boolean).join(" • ")}
+                        {[resumeField(r, lang, "employmentType"), resumeField(r, lang, "location")].filter(Boolean).join(" • ")}
                       </div>
                     )}
-                    {r.description && <div class="mt-1 text-sm text-slate-600">{r.description}</div>}
+                    {resumeField(r, lang, "description") && <div class="mt-1 text-sm text-slate-600">{resumeField(r, lang, "description")}</div>}
                   </div>
                 </div>
               ))}
@@ -115,15 +115,45 @@ const pageTitle = lang === "tr" ? "Hakkımda" : "About";
           <ul class="space-y-3 text-sm text-slate-700">
             <li class="flex gap-2">
               <span class="mt-0.5 text-sky-700"><Icon name="spark" class="h-5 w-5" /></span>
-              <span><strong>6+ yıl</strong> WordPress, <strong>3+ yıl</strong> SEO</span>
+              <span>
+                {lang === "tr" ? (
+                  <>
+                    Aktif <strong>bireysel mentörlük</strong>: Web Tasarım, AI Çözümleri, Kurumsal Kimlik, Markalaşma
+                  </>
+                ) : (
+                  <>
+                    Active <strong>individual mentoring</strong>: Web Design, AI Solutions, Corporate Identity, Branding
+                  </>
+                )}
+              </span>
             </li>
             <li class="flex gap-2">
               <span class="mt-0.5 text-sky-700"><Icon name="briefcase" class="h-5 w-5" /></span>
-              <span><strong>Lead</strong> • UI/UX, görsel kimlik, mentorluk</span>
+              <span>
+                {lang === "tr" ? (
+                  <>
+                    <strong>6+ yıl</strong> WordPress, <strong>3+ yıl</strong> SEO
+                  </>
+                ) : (
+                  <>
+                    <strong>6+ years</strong> WordPress, <strong>3+ years</strong> SEO
+                  </>
+                )}
+              </span>
             </li>
             <li class="flex gap-2">
               <span class="mt-0.5 text-sky-700"><Icon name="badge" class="h-5 w-5" /></span>
-              <span><strong>No-code / Low-code</strong> ile hızlı üretim</span>
+              <span>
+                {lang === "tr" ? (
+                  <>
+                    <strong>No-code / Low-code</strong> ile hızlı üretim
+                  </>
+                ) : (
+                  <>
+                    Fast delivery with <strong>no-code / low-code</strong>
+                  </>
+                )}
+              </span>
             </li>
           </ul>
 

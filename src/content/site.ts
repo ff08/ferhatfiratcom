@@ -6,14 +6,32 @@ export type SocialLink = {
 
 export type ResumeItem = {
   title: string;
+  titleEn?: string;
   company: string;
+  companyEn?: string;
   companyShort?: string;
   range: string;
+  rangeEn?: string;
   location?: string;
+  locationEn?: string;
   employmentType?: string;
+  employmentTypeEn?: string;
   description?: string;
+  descriptionEn?: string;
   icon?: "spark" | "briefcase" | "rocket" | "badge";
 };
+
+export type Lang = "tr" | "en";
+
+export function resumeField(
+  item: ResumeItem,
+  lang: Lang,
+  key: "title" | "company" | "range" | "location" | "employmentType" | "description"
+): string | undefined {
+  const enKey = `${key}En` as keyof ResumeItem;
+  if (lang === "en" && item[enKey]) return item[enKey] as string;
+  return item[key];
+}
 
 export type ProjectItem = {
   title: string;
@@ -61,7 +79,7 @@ export const site = {
   name: "Ferhat FIRAT",
   domain: "ferhatfirat.com",
   tagline:
-    "Lead Web Designer | UpCard | No-Code & Low-Code Expert | Brand Growth & Digital Innovation | Orion Tekmer Mentor | Brizy Mentor",
+    "Lead Web Designer | UpCard Co-Founder | Orion Tekmer Mentor | Brizy Mentor | Türkiye No Code & Low Code & Vibe Code Community",
   followers: "1500+ takipçi",
   locationLabel: "Ankara, Türkiye",
   locationAddress: "Ankara, Türkiye",
@@ -70,19 +88,20 @@ export const site = {
   hero: {
     title: "I’m Ferhat FIRAT",
     subtitle:
-      "Lead Web Designer • No-Code & Low-Code Expert • Brand Growth & Digital Innovation",
+      "Lead Web Designer | UpCard Co-Founder | Orion Tekmer Mentor | Brizy Mentor | Türkiye No Code & Low Code & Vibe Code Community",
     bioEn: [
-      "As a Lead Web Designer at Creavision GmbH, I shape the visual identity and user experience of our digital products while mentoring and collaborating with our design team.",
-      "With 6+ years of experience in WordPress development and 3+ years as an SEO Specialist, I deliver creative, fast, and performance-driven web design solutions that align with business goals and boost search visibility.",
+      "I currently provide individual mentoring in Web Design, AI Solutions, Corporate Identity Design, and Branding — helping brands turn ideas into clear, scalable digital experiences.",
+      "With 6+ years of experience in WordPress development and 3+ years as an SEO Specialist, I deliver creative, fast, and performance-driven solutions aligned with business goals.",
+      "I previously led web development and design teams at Creavision GmbH and Accretion Digital, shaping visual identity, UX, and delivery processes across international projects.",
       "I hold degrees in Computer Engineering (Selçuk University) and Business & Management (Anadolu University) — a blend that gives me a strong foundation in technology, design, and business strategy.",
-      "I’m passionate about UI/UX design, digital marketing, and no-code tools that simplify and accelerate web creation. My mission is to help brands grow online through comprehensive SEO audits, keyword research, competitor analysis, and technical optimization."
+      "I’m passionate about UI/UX design, digital marketing, and no-code tools that simplify and accelerate web creation."
     ],
     bioTr: [
-      "🇹🇷 Creavision GmbH’de Lead Web Designer olarak dijital projelerimizin görsel kimliğini ve kullanıcı deneyimini tasarlıyor, aynı zamanda ekibime mentorluk yapıyorum.",
-      "6 yılı aşkın WordPress geliştirme ve 3 yıldan fazla SEO uzmanlığı deneyimimle, işletme hedeflerine uygun, yaratıcı ve performans odaklı web tasarım çözümleri üretiyorum.",
+      "Şu anda bireysel mentörlük veriyorum; Web Tasarım, AI Çözümleri, Kurumsal Kimlik Tasarımı ve Markalaşma alanlarında markaların dijitalde büyümesine destek oluyorum.",
+      "6 yılı aşkın WordPress geliştirme ve 3 yıldan fazla SEO uzmanlığı deneyimimle, işletme hedeflerine uygun, yaratıcı ve performans odaklı çözümler üretiyorum.",
+      "Creavision GmbH ve Accretion Digital gibi uluslararası ekiplerde web geliştirme ve tasarım liderliği yaptım; görsel kimlik, kullanıcı deneyimi ve teslim süreçlerini yönettim.",
       "Selçuk Üniversitesi Bilgisayar Mühendisliği ve Anadolu Üniversitesi İşletme mezunuyum. Bu iki alan, bana teknoloji, tasarım ve iş stratejisi arasında güçlü bir köprü kurma becerisi kazandırdı.",
-      "UI/UX tasarımı, dijital pazarlama ve No-Code araçları konusunda tutkuluyum; markaların dijitalde büyümesini sağlamak için SEO denetimleri, anahtar kelime araştırmaları, rakip analizleri ve teknik optimizasyonlar yapıyorum.",
-      "Hedefim markaların fikirlerini hızlı, estetik ve sürdürülebilir dijital deneyimlere dönüştürmelerine yardımcı olmak."
+      "UI/UX tasarımı, dijital pazarlama ve No-Code araçları konusunda tutkuluyum; markaların fikirlerini hızlı, estetik ve sürdürülebilir dijital deneyimlere dönüştürmelerine yardımcı oluyorum."
     ],
     missionTr: "Amacım, danışanlarımın fikirlerini sınır tanımadan hayata geçirmelerine olanak sağlamak.",
     missionEn: "My goal is to enable my clients to bring their ideas to life without limits."
@@ -98,11 +117,29 @@ export const site = {
   ] satisfies SocialLink[],
   resume: [
     {
+      title: "Bireysel Mentor & Danışman",
+      titleEn: "Independent Mentor & Consultant",
+      company: "Serbest",
+      companyEn: "Freelance",
+      companyShort: "FF",
+      employmentType: "Serbest çalışan",
+      employmentTypeEn: "Self-employed",
+      range: "Nis 2026 — Devam ediyor",
+      rangeEn: "Apr 2026 — Present",
+      location: "Uzaktan",
+      locationEn: "Remote",
+      icon: "spark",
+      description:
+        "Web Tasarım, AI Çözümleri, Kurumsal Kimlik Tasarımı ve Markalaşma alanlarında bireysel mentörlük.",
+      descriptionEn:
+        "Individual mentoring in Web Design, AI Solutions, Corporate Identity Design, and Branding."
+    },
+    {
       title: "Head of Web Development",
       company: "Creavision GmbH",
       companyShort: "C",
       employmentType: "Tam zamanlı",
-      range: "Tem 2023 — Devam ediyor",
+      range: "Tem 2023 — Nis 2026",
       location: "Mannheim, Baden-Württemberg, Almanya · Uzaktan",
       icon: "briefcase",
       description:
@@ -715,11 +752,11 @@ export const site = {
       country: "TR"
     },
     {
-      title: "Rubtek PEDM",
+      title: "Rubtek EPDM",
       descriptionTr: "Endüstriyel firma sitesi; ürün/hizmet tanıtımı ve içerik düzeni.",
       descriptionEn: "Industrial company website with product/service presentation.",
-      href: "https://www.rubtekpedm.com",
-      domain: "rubtekpedm.com",
+      href: "https://rubtekepdm.com",
+      domain: "rubtekepdm.com",
       country: "TR"
     },
     {
@@ -755,11 +792,11 @@ export const site = {
       country: "TR"
     },
     {
-      title: "MZL Dental Klinik",
+      title: "MZA Dental Klinik",
       descriptionTr: "Diş kliniği tanıtım sitesi; hizmet sayfaları ve randevu odaklı akış.",
       descriptionEn: "Dental clinic website with service pages and appointment-oriented flow.",
-      href: "https://mzldentalklinik.com",
-      domain: "mzldentalklinik.com",
+      href: "https://mzadentalklinik.com",
+      domain: "mzadentalklinik.com",
       country: "TR"
     },
     {
