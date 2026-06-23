@@ -808,6 +808,22 @@ export const site = {
       country: "TR"
     },
     {
+      title: "Eser Apart Otel",
+      descriptionTr: "Apart otel tanıtım sitesi; oda vitrini, konum bilgisi ve rezervasyon odaklı iletişim.",
+      descriptionEn: "Apart hotel website with room showcase, location details, and booking-oriented contact flow.",
+      href: "https://eserapartdalyan.com",
+      domain: "eserapartdalyan.com",
+      country: "TR"
+    },
+    {
+      title: "Yesemek Cüruf",
+      descriptionTr: "Endüstriyel ürün tanıtım sitesi; hizmet/ürün sayfaları ve kurumsal iletişim akışı.",
+      descriptionEn: "Industrial product website with service pages and corporate contact flow.",
+      href: "https://yesemekcurufbims.com",
+      domain: "yesemekcurufbims.com",
+      country: "TR"
+    },
+    {
       title: "Long Island Express Limo",
       descriptionTr: "Ulaşım/limuzin hizmet sitesi; rezervasyon ve iletişim CTA’ları.",
       descriptionEn: "Transportation/limo service site with booking and contact CTAs.",
